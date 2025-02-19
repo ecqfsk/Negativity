@@ -3,7 +3,7 @@
 It's a Minecraft AntiCheat for multiples platforms :
 - **Spigot** 1.8.8 to 1.21 (*and fork like PaperSpigot or Tuinity*)
 - **Sponge** API 7, 8, 9 & 10
-- **WARN**: After internal issue, it's actually not available. **Fabric** MC 1.18.2, 1.19 to 1.19.4 (Download [here](https://github.com/Elikill58/NegativityFabric#negativityfabric))
+- **Fabric** MC 1.18.2 to 1.21.4 (Download [here](https://github.com/Elikill58/NegativityFabric#negativityfabric))
 - **Minestom** 1.19.3
 
 Proxies:
@@ -23,10 +23,6 @@ Suggestions and bug reports can also be filled in [this repository issue tracker
 ## How to install ?
 
 Check [installation wiki](https://github.com/Elikill58/Negativity/wiki/Installation) for all informations according to platform.
-
-## I want to test it before download !
-
-You can check it on **play.negativity.fr** (server in 1.19.2, you can connect with 1.8.8 to 1.19.2). Server can be down.
 
 ## What are the detected cheat ?
 
@@ -90,7 +86,8 @@ For permissions config, [click here](https://github.com/Elikill58/Negativity/wik
 Prerequisites:
 - [Git](https://git-scm.com)
 - JDK 8 (any distribution should work, [AdoptOpenJDK](https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot) for example)
-- JDK 18 (any distribution should work) recommended for latest minecraft version (also work with lower versions)
+- JDK 17 (any distribution should work) recommended for latest minecraft version (also work with lower versions)
+- JDK 21 (any distribution should work) required for fabric platform
 
 In the following instructions you will have to execute Gradle tasks. You **must** use the Gradle wrapper distributed in this repository.
 
