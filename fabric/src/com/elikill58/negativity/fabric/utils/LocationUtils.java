@@ -2,11 +2,12 @@ package com.elikill58.negativity.fabric.utils;
 
 import com.elikill58.negativity.universal.utils.UniversalUtils;
 
-import net.minecraft.block.Material;
+import net.minecraft.block.Blocks;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 public class LocationUtils {
@@ -22,7 +23,7 @@ public class LocationUtils {
 				int vecY = UniversalUtils.floor(vec3d1.getY());
 				int vecZ = UniversalUtils.floor(vec3d1.getZ());
 				Vec3d vector = new Vec3d(posX, posY, posZ);
-				if (!w.getBlockState(new BlockPos(vector)).getMaterial().equals(Material.AIR) && hasMovingPosition(w, vector, vec3d, vec3d1))
+				if (!w.getBlockState(new BlockPos(new Vec3i(posX, posY, posZ))).getBlock().equals(Blocks.AIR) && hasMovingPosition(w, vector, vec3d, vec3d1))
 					return false;
 
 				int i = 200;
@@ -90,7 +91,7 @@ public class LocationUtils {
 					posY = UniversalUtils.floor(vec3d.getY()) - (direction == Direction.UP ? 1 : 0);
 					posZ = UniversalUtils.floor(vec3d.getZ()) - (direction == Direction.SOUTH ? 1 : 0);
 					vector = new Vec3d(posX, posY, posZ);
-					if (!w.getBlockState(new BlockPos(vector)).getMaterial().equals(Material.AIR))
+					if (!w.getBlockState(new BlockPos(new Vec3i(posX, posY, posZ))).getBlock().equals(Blocks.AIR))
 						if (hasMovingPosition(w, vector, vec3d, vec3d1))
 							return false;
 				}
