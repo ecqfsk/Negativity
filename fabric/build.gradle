@@ -2,7 +2,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id 'fabric-loom'
-    id 'com.gradleup.shadow'
 }
 
 evaluationDependsOn(':common')
@@ -22,7 +21,7 @@ loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"modid" {
+		"negativity" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
@@ -51,6 +50,10 @@ processResources {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
 java {
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.
@@ -62,9 +65,14 @@ shadowJar {
     archiveBaseName.set('NegativityFabric')
     archiveAppendix.set('common')
     archiveClassifier.set(null)
-
+    
+    dependencies {
+        it.include(it.project(':common'))
+    }
     mergeServiceFiles()
     from(project(':common').tasks.shadowJar)
+    
+    exclude('mappings/*')
 }
 
 build.dependsOn shadowJar

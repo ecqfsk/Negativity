@@ -3,7 +3,6 @@ import org.spongepowered.plugin.metadata.model.PluginDependency
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    id 'com.gradleup.shadow'
     id 'org.spongepowered.gradle.plugin'
 }
 
