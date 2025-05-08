@@ -4,30 +4,7 @@ import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import com.elikill58.negativity.api.packets.nms.NamedVersion;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_10;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_11;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_12;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_12_2;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_13;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_14;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_14_4;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_15;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_16;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_17;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_18;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_19;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_19_2;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_19_3;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_19_4;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_20;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_20_2;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_20_4;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_20_6;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_21;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_21_3;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_8;
-import com.elikill58.negativity.api.packets.nms.versions.Version1_9;
-import com.elikill58.negativity.api.packets.nms.versions.VersionUnknown;
+import com.elikill58.negativity.api.packets.nms.versions.*;
 
 public enum Version {
 	
@@ -54,8 +31,10 @@ public enum Version {
 	V1_20_4("1.20.4", 20.4, Version1_20_4::new, 765),
 	V1_20_6("1.20.6", 20.5, Version1_20_6::new, 766),
 	V1_21("1.21", 21, Version1_21::new, 767),
-	V1_21_3("1.21.3", 21.3, Version1_21_3::new, 768, 999),
-	HIGHER("higher", 42, VersionUnknown::new, 1000);
+	V1_21_3("1.21.3", 21.3, Version1_21_3::new, 768),
+	V1_21_4("1.21.4", 21.4, Version1_21_4::new, 769),
+	V1_21_5("1.21.5", 21.5, Version1_21_5::new, 770, 771),
+	HIGHER("higher", 42, VersionUnknown::new, 772, 1000);
 
 	private final double power;
 	private final int firstProtocolNumber, lastProtocolNumber;

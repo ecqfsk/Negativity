@@ -211,8 +211,19 @@ public interface PacketType {
 		JIGSAW_GENERATE,
 		KEEP_ALIVE(NPacketPlayInKeepAlive::new),
 		LOOK(NPacketPlayInLook::new),
+		/**
+		 * Pick item (in general, or from block when {@link #PICK_ITEM_ENTITY} is used too.
+		 */
 		PICK_ITEM,
+		/**
+		 * Since 1.21.4 - Pick item but from entity
+		 */
+		PICK_ITEM_ENTITY,
 		PING,
+		/**
+		 * Since 1.21.4
+		 */
+		PLAYER_LOADED,
 		POSITION(NPacketPlayInPosition::new),
 		POSITION_LOOK(NPacketPlayInPositionLook::new),
 		RECIPE_SETTINGS,
@@ -229,6 +240,11 @@ public interface PacketType {
 		STRUCT,
 		TAB_COMPLETE,
 		TELEPORT_ACCEPT(NPacketPlayInTeleportAccept::new),
+		TELEPORT_TO_ENTITY,
+		/**
+		 * Since 1.21.5
+		 */
+		TEST_INSTANCE_BLOCK_ACTION,
 		TICK_END,
 		TILE_NBT_QUERY,
 		TRADE_SELECT,
@@ -406,6 +422,9 @@ public interface PacketType {
 		SIMULATION_DISTANCE,
 		SPAWN_ENTITY,
 		SPAWN_ENTITY_LIVING,
+		/**
+		 * Removed in 1.21.5
+		 */
 		SPAWN_ENTITY_EXPERIENCE_ORB,
 		SPAWN_ENTITY_PAINTING,
 		SPAWN_ENTITY_WEATHER,
@@ -420,6 +439,10 @@ public interface PacketType {
 		TAGS,
 		TAG_UPDATE,
 		TAKE_ITEM_ENTITY,
+		/**
+		 * Since 1.21.5
+		 */
+		TEST_INSTANCE_BLOCK_STATUS,
 		TICKING_STATE,
 		TICKING_STEP,
 		TILE_ENTITY_DATA,

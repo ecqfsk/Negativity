@@ -20,7 +20,7 @@ public class NPacketPlayInBlockDig implements NPacketPlayIn, LocatedPacket {
 	
 	@Override
 	public void read(PacketSerializer serializer, Version version) {
-		this.action = DigAction.getById(serializer.readVarInt());
+		this.action = serializer.getEnum(DigAction.class);
 		this.pos = serializer.readBlockPosition(version);
 		this.face = BlockFace.getById(serializer.readUnsignedByte());
 	}
@@ -47,19 +47,19 @@ public class NPacketPlayInBlockDig implements NPacketPlayIn, LocatedPacket {
 	
 	public static enum DigAction {
 
-		START_DIGGING(0),
-		CANCEL_DIGGING(1),
-		FINISHED_DIGGING(2),
+		START_DIGGING,
+		CANCEL_DIGGING,
+		FINISHED_DIGGING,
 		
 		/**
 		 * Drop the entire of the item stack
 		 */
-		DROP_ITEM_STACK(3),
+		DROP_ITEM_STACK,
 		
 		/**
 		 * Drop one item
 		 */
-		DROP_ITEM(4),
+		DROP_ITEM,
 		
 		/**
 		 * The finished action can correspond to:<br>
@@ -68,28 +68,12 @@ public class NPacketPlayInBlockDig implements NPacketPlayIn, LocatedPacket {
 		 * - Use bucket<br>
 		 * - ...
 		 */
-		FINISH_ACTION(5),
+		FINISH_ACTION,
 		
 		/**
 		 * Action when item is swipped between two item
 		 */
-		SWAP_ITEM(6);
+		SWAP_ITEM;
 		
-		private final int id;
-		
-		private DigAction(int id) {
-			this.id = id;
-		}
-		
-		public int getId() {
-			return id;
-		}
-		
-		public static DigAction getById(int id) {
-			for(DigAction da : values())
-				if(da.getId() == id)
-					return da;
-			return null;
-		}
 	}
 }
