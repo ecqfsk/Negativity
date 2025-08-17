@@ -12,20 +12,18 @@ import com.elikill58.negativity.api.events.EventListener;
 import com.elikill58.negativity.api.events.Listeners;
 import com.elikill58.negativity.api.events.inventory.InventoryCloseEvent;
 import com.elikill58.negativity.api.events.player.LoginEvent;
-import com.elikill58.negativity.api.events.player.PlayerChatEvent;
 import com.elikill58.negativity.api.events.player.LoginEvent.Result;
-import com.elikill58.negativity.api.inventory.InventoryManager;
-import com.elikill58.negativity.api.inventory.InventoryType;
-import com.elikill58.negativity.api.inventory.AbstractInventory.NegativityInventory;
 import com.elikill58.negativity.api.events.player.PlayerConnectEvent;
 import com.elikill58.negativity.api.events.player.PlayerLeaveEvent;
 import com.elikill58.negativity.api.events.player.PlayerTeleportEvent;
+import com.elikill58.negativity.api.inventory.AbstractInventory.NegativityInventory;
+import com.elikill58.negativity.api.inventory.InventoryManager;
+import com.elikill58.negativity.api.inventory.InventoryType;
 import com.elikill58.negativity.common.commands.ReportCommand;
 import com.elikill58.negativity.common.inventories.hook.players.GlobalPlayerInventory;
 import com.elikill58.negativity.universal.Adapter;
 import com.elikill58.negativity.universal.Messages;
 import com.elikill58.negativity.universal.SanctionnerType;
-import com.elikill58.negativity.universal.Stats;
 import com.elikill58.negativity.universal.account.NegativityAccount;
 import com.elikill58.negativity.universal.ban.AltAccountBan;
 import com.elikill58.negativity.universal.ban.Ban;
@@ -144,11 +142,6 @@ public class ConnectionManager implements Listeners {
 		Player p = e.getPlayer();
 		WebhookManager.getWebhooks().forEach(w -> w.clean(p));
 		GlobalPlayerInventory.PLAYER_SEE_PLAYER_INV.remove(p.getUniqueId());
-	}
-	
-	@EventListener
-	public void onMessage(PlayerChatEvent e) {
-		Stats.updateMessage(NegativityPlayer.getNegativityPlayer(e.getPlayer()), e.getMessage());
 	}
 	
 	@EventListener

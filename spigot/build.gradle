@@ -33,7 +33,7 @@ configurations {
 
 dependencies {
     api project(':common')
-    compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.3.0'
     spigot 'org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT'
 }
 

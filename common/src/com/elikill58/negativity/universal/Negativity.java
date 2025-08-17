@@ -159,7 +159,6 @@ public class Negativity {
 				return false;
 			}
 		}
-		Stats.updateCheat(c, (int) amount);
 		if (BanManager.isBanned(np.getUUID()))
 			return false;
 

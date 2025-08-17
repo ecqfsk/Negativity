@@ -328,7 +328,11 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 			case "v1_21":
 			case "v1_21_1":
 			case "v1_21_3":
-			case "v1_21_4": // all of them seems to have almost same options/config
+			case "v1_21_4":
+			case "v1_21_5":
+			case "v1_21_6":
+			case "v1_21_7":
+			case "v1_21_8": // all of them seems to have almost same options/config
 				return instance = new Spigot_1_21_R1();
 			default:
 				return instance = new Spigot_UnknowVersion(Adapter.getAdapter().getVersion());

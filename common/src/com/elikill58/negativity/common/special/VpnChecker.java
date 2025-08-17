@@ -43,8 +43,13 @@ public class VpnChecker extends Special implements Listeners {
 			}
 		}
 		UniversalUtils.getContentFromURL("https://api.negativity.fr/ip/" + ip).ifPresent(result -> {
+			if(result == null)
+				return; // prevent wrong result from API
 			try {
-				VpnResult vpn = new VpnResult((JSONObject) new JSONParser().parse(result));
+				JSONObject json = (JSONObject) new JSONParser().parse(result);
+				if(json.getOrDefault("status", "200").toString().equalsIgnoreCase("500")) // can't load this
+					return;
+				VpnResult vpn = new VpnResult(json);
 				subnets.put(vpn.getMatcher(), vpn);
 				manageVpn(e, ip, vpn);
 			} catch (ParseException e1) {

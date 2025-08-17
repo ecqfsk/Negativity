@@ -196,6 +196,10 @@ public interface PacketType {
 		COOKIE_RESPONSE,
 		CUSTOM_PAYLOAD(NPacketPlayInCustomPayload::new),
 		/**
+		 * Since MC 1.21.6
+		 */
+		CUSTOM_CLICK_ACTION,
+		/**
 		 * Since MC 1.20.5
 		 */
 		DEBUG_SAMPLE_SUBSCRIPTION,
@@ -205,6 +209,10 @@ public interface PacketType {
 		ENTITY_ACTION(NPacketPlayInEntityAction::new),
 		ENTITY_NBT_QUERY,
 		FLYING(NPacketPlayInFlying::new),
+		/**
+		 * Since MC 1.21.8
+		 */
+		GAMEMODE_CHANGE,
 		GROUND(NPacketPlayInGround::new),
 		HELD_ITEM_SLOT(NPacketPlayInHeldItemSlot::new),
 		ITEM_NAME,
@@ -233,6 +241,7 @@ public interface PacketType {
 		SET_COMMAND_MINECART,
 		SET_CREATIVE_SLOT(NPacketPlayInSetCreativeSlot::new),
 		SET_JIGSAW,
+		SET_TEST_BLOCK,
 		SETTINGS(NPacketPlayInSettings::new),
 		SPECTATE,
 		SLOT_STATE_CHANGE,
@@ -335,6 +344,14 @@ public interface PacketType {
 		CUSTOM_REPORT_DETAILS,
 		DAMAGE_EVENT,
 		DEBUG_SAMPLE,
+		/**
+		 * Since 1.21.7
+		 */
+		DIALOG_CLEAR,
+		/**
+		 * Since 1.21.7
+		 */
+		DIALOG_SHOW,
 		ENTITY,
 		ENTITY_DESTROY(NPacketPlayOutEntityDestroy::new),
 		ENTITY_EFFECT(NPacketPlayOutEntityEffect::new),
@@ -460,6 +477,10 @@ public interface PacketType {
 		VEHICLE_MOVE,
 		VIEW_DISTANCE,
 		VIEW_CENTRE,
+		/**
+		 * Since 1.21.7
+		 */
+		WAYPOINT,
 		WINDOW_DATA,
 		WINDOW_ITEMS,
 		WORLD_BORDER,
