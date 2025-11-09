@@ -109,7 +109,7 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 				for (long m : array)
 					l += m;
 				return l / array.length;
-			} else {
+			} else if (tps instanceof double[]) {
 				double[] array = (double[]) tps;
 				double l = 0L;
 				for (double m : array)
@@ -118,8 +118,8 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
 		}
+		return 0;
 	}
 
 	public abstract String getTpsFieldName();

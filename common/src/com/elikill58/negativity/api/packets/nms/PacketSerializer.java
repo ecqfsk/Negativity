@@ -270,6 +270,10 @@ public class PacketSerializer extends UnpooledHeapByteBuf {
 		return new BlockPosition(x, y, z);
 	}
 
+	public Vector readDoubleVector() {
+		return new Vector(readDouble(), readDouble(), readDouble());
+	}
+
 	public Vector readVector() {
 		return new Vector(readFloat(), readFloat(), readFloat());
 	}

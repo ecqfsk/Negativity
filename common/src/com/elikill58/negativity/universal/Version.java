@@ -33,8 +33,10 @@ public enum Version {
 	V1_21("1.21", 21, Version1_21::new, 767),
 	V1_21_3("1.21.3", 21.3, Version1_21_3::new, 768),
 	V1_21_4("1.21.4", 21.4, Version1_21_4::new, 769),
-	V1_21_6("1.21.6", 21.6, Version1_21_6::new, 770, 771),
-	V1_21_8("1.21.8", 21.8, Version1_21_8::new, 772, 773),
+	V1_21_5("1.21.5", 21.5, Version1_21_6::new, 770),
+	V1_21_6("1.21.6", 21.6, Version1_21_6::new, 771),
+	V1_21_8("1.21.8", 21.8, Version1_21_8::new, 772),
+	V1_21_10("1.21.10", 21.10, Version1_21_8::new, 773),
 	HIGHER("higher", 42, VersionUnknown::new, 774, 1000);
 
 	private final double power;
