@@ -42,13 +42,13 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 			dedicatedServer = PacketUtils.getDedicatedServer();
 
 			Class<?> mcServer = PacketUtils.getNmsClass("MinecraftServer", "server.");
-			recentTpsField = mcServer.getDeclaredField("recentTps");
+			recentTpsField = ReflectionUtils.getFirstFieldFounded(mcServer, "recentTps", "tps");
 			tpsField = mcServer.getDeclaredField(getTpsFieldName());
 			tpsField.setAccessible(true);
 
 			getPlayerHandle = PacketUtils.getObcClass("entity.CraftPlayer").getDeclaredMethod("getHandle");
 
-			Class<?> entityPlayerClass = PacketUtils.getNmsClass("EntityPlayer", "server.level.");
+			Class<?> entityPlayerClass = PacketUtils.getNmsClass(version.isNewerOrEquals(Version.V1_21_11) ? "ServerPlayer" : "EntityPlayer", "server.level.");
 			if(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) || version.isNewerOrEquals(Version.V1_21_3)) {
 				playerConnectionField = PacketUtils.getNmsClass("ServerPlayer", "server.level.").getDeclaredField("connection");
 			} else if (version.isNewerOrEquals(Version.V1_20))
@@ -57,7 +57,7 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 				playerConnectionField = entityPlayerClass.getDeclaredField("b");
 			else
 				playerConnectionField = entityPlayerClass.getDeclaredField("playerConnection");
-			Class<?> bbClass = PacketUtils.getNmsClass(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) ? "AABB" : "AxisAlignedBB", "world.phys.");
+			Class<?> bbClass = PacketUtils.getNmsClass(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) || version.isNewerOrEquals(Version.V1_21_11) ? "AABB" : "AxisAlignedBB", "world.phys.");
 
 			if (version.isNewerOrEquals(Version.V1_13) && hasMinField(bbClass)) {
 				minX = bbClass.getDeclaredField("minX");
@@ -79,7 +79,7 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 			this.getBukkitEntity = PacketUtils.getNmsClass("Entity", "world.entity.").getDeclaredMethod("getBukkitEntity");
 
 			if (version.isNewerOrEquals(Version.V1_17)) {
-				Class<?> worldServer = PacketUtils.getNmsClass(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) ? "ServerLevel" : "WorldServer", "server.level.");
+				Class<?> worldServer = PacketUtils.getNmsClass(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) || version.isNewerOrEquals(Version.V1_21_11) ? "ServerLevel" : "WorldServer", "server.level.");
 
 				try {
 					getEntityLookup = worldServer.getDeclaredMethod("getEntityLookup");
@@ -332,7 +332,9 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 			case "v1_21_5":
 			case "v1_21_6":
 			case "v1_21_7":
-			case "v1_21_8": // all of them seems to have almost same options/config
+			case "v1_21_8":
+			case "v1_21_10":
+			case "v1_21_11": // all of them seems to have almost same options/config
 				return instance = new Spigot_1_21_R1();
 			default:
 				return instance = new Spigot_UnknowVersion(Adapter.getAdapter().getVersion());

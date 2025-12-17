@@ -7,9 +7,9 @@ import com.elikill58.negativity.api.packets.PacketType.Client;
 import com.elikill58.negativity.api.packets.PacketType.Server;
 import com.elikill58.negativity.api.packets.nms.NamedVersion;
 
-public class Version1_21_4 extends NamedVersion {
+public class Version1_21_04 extends NamedVersion {
 
-	public Version1_21_4() {
+	public Version1_21_04() {
 		super("1.21.4");
 		int i = 0;
 		for (Client type : Arrays.asList(Client.TELEPORT_ACCEPT, Client.TILE_NBT_QUERY, Client.BUNDLE_ITEM_SELECTED, Client.DIFFICULTY_CHANGE, Client.CHAT_ACK, Client.CHAT_COMMAND,

@@ -1,0 +1,70 @@
+package com.elikill58.negativity.api.packets.nms.versions;
+
+import java.util.Arrays;
+
+import com.elikill58.negativity.api.entity.EntityType;
+import com.elikill58.negativity.api.packets.PacketType.Client;
+import com.elikill58.negativity.api.packets.PacketType.Server;
+import com.elikill58.negativity.api.packets.nms.NamedVersion;
+
+public class Version1_21_11 extends NamedVersion {
+
+	public Version1_21_11() {
+		super("1.21.10");
+		int i = 0;
+		for (Client type : Arrays.asList(Client.TELEPORT_ACCEPT, Client.TILE_NBT_QUERY, Client.BUNDLE_ITEM_SELECTED, Client.DIFFICULTY_CHANGE, Client.GAMEMODE_CHANGE, Client.CHAT_ACK,
+				Client.CHAT_COMMAND, Client.CHAT_COMMAND_SIGNED, Client.CHAT, Client.CHAT_SESSION_UPDATE, Client.CHUNK_BATCH_RECEIVED, Client.CLIENT_COMMAND, Client.TICK_END, Client.SETTINGS,
+				Client.TAB_COMPLETE, Client.CONFIGURATION_ACKNOWLEDGED, Client.ENCHANT_ITEM, Client.WINDOW_CLICK, Client.CLOSE_WINDOW, Client.SLOT_STATE_CHANGE, Client.COOKIE_RESPONSE,
+				Client.CUSTOM_PAYLOAD, Client.DEBUG_SAMPLE_SUBSCRIPTION, Client.BEDIT, Client.ENTITY_NBT_QUERY, Client.USE_ENTITY, Client.JIGSAW_GENERATE, Client.KEEP_ALIVE, Client.DIFFICULTY_LOCK,
+				Client.POSITION, Client.POSITION_LOOK, Client.LOOK, Client.GROUND, Client.VEHICLE_MOVE, Client.BOAT_MOVE, Client.PICK_ITEM, Client.PICK_ITEM_ENTITY, Client.PING, Client.AUTO_RECIPE,
+				Client.ABILITIES, Client.BLOCK_DIG, Client.ENTITY_ACTION, Client.STEER_VEHICLE, Client.PLAYER_LOADED, Client.PONG, Client.RECIPE_SETTINGS, Client.RECIPE_DISPLAYED, Client.ITEM_NAME,
+				Client.RESOURCE_PACK_STATUS, Client.ADVANCEMENTS, Client.TRADE_SELECT, Client.BEACON, Client.HELD_ITEM_SLOT, Client.SET_COMMAND_BLOCK, Client.SET_COMMAND_MINECART,
+				Client.SET_CREATIVE_SLOT, Client.SET_JIGSAW, Client.STRUCT, Client.SET_TEST_BLOCK, Client.UPDATE_SIGN, Client.ARM_ANIMATION, Client.TELEPORT_TO_ENTITY,
+				Client.TEST_INSTANCE_BLOCK_ACTION, Client.USE_ITEM, Client.BLOCK_PLACE, Client.CUSTOM_CLICK_ACTION)) {
+			playIn.put(i++, type);
+		}
+		i = 0;
+		for (Server type : Arrays.asList(Server.SPAWN_ENTITY, Server.ANIMATION, Server.STATISTIC, Server.BLOCK_CHANGED_ACK, Server.BLOCK_BREAK_ANIMATION, Server.TILE_ENTITY_DATA, Server.BLOCK_ACTION,
+				Server.BLOCK_CHANGE, Server.BOSS, Server.SERVER_DIFFICULTY, Server.CHUNK_BATCH_FINISHED, Server.CHUNK_BATCH_STARTED, Server.CHUNK_BIOMES, Server.CLEAR_TITLE, Server.TAB_COMPLETE,
+				Server.COMMANDS, Server.CLOSE_WINDOW, Server.WINDOW_ITEMS, Server.WINDOW_DATA, Server.SET_SLOT, Server.COOKIE_REQUEST, Server.SET_COOLDOWN, Server.CHAT_CUSTOM_COMPLETION,
+				Server.CUSTOM_PAYLOAD, Server.DAMAGE_EVENT, Server.DEBUG_BLOCK_VALUES, Server.DEBUG_CHUNK_VALUE, Server.DEBUG_ENTITY_VALUE, Server.DEBUG_EVENT, Server.DEBUG_SAMPLE, Server.CHAT_DELETE,
+				Server.KICK_DISCONNECT, Server.CHAT_DISGUISED, Server.ENTITY_STATUS, Server.ENTITY_POSITION_SYNC, Server.EXPLOSION, Server.UNLOAD_CHUNK, Server.GAME_STATE_CHANGE,
+				Server.OPEN_WINDOW_HORSE, Server.HURT_ANIMATION, Server.INITIALIZE_BORDER, Server.KEEP_ALIVE, Server.LEVEL_CHUNK_LIGHT, Server.WORLD_EVENT, Server.WORLD_PARTICLES, Server.LIGHT_UPDATE,
+				Server.LOGIN, Server.MAP, Server.OPEN_WINDOW_MERCHANT, Server.REL_ENTITY_MOVE, Server.REL_ENTITY_MOVE_LOOK, Server.MOVE_MINECART_ALONG_TRACK, Server.REL_ENTITY_LOOK,
+				Server.VEHICLE_MOVE, Server.OPEN_BOOK, Server.OPEN_WINDOW, Server.OPEN_SIGN_EDITOR, Server.PING, Server.PONG, Server.RECIPE_PLACE_GHOST, Server.ABILITIES, Server.CHAT,
+				Server.COMBAT_END_EVENT, Server.COMBAT_ENTER_EVENT, Server.COMBAT_KILL_EVENT, Server.PLAYER_INFO_REMOVE, Server.PLAYER_INFO_UPDATE, Server.LOOK_AT, Server.POSITION, Server.ROTATION,
+				Server.RECIPE_BOOK_ADD, Server.RECIPE_BOOK_REMOVE, Server.RECIPE_BOOK_SETTINGS, Server.REMOVE_ENTITIES, Server.REMOVE_ENTITY_EFFECT, Server.SCOREBOARD_RESET, Server.RESOURCE_PACK_POP,
+				Server.RESOURCE_PACK_SEND, Server.RESPAWN, Server.ENTITY_HEAD_ROTATION, Server.MULTI_BLOCK_CHANGE, Server.SELECT_ADVANCEMENT_TAB, Server.SERVER_DATA, Server.SET_ACTION_BAR_TEXT,
+				Server.SET_BORDER_CENTER, Server.SET_BORDER_LERP_SIZE, Server.SET_BORDER_SIZE, Server.SET_BORDER_WARNING_DELAY, Server.SET_BORDER_WARNING_DISTANCE, Server.CAMERA,
+				Server.SET_CHUNK_CACHE_CENTER, Server.SET_CHUNK_CACHE_RADIUS, Server.SET_CURSOR_ITEM, Server.SPAWN_POSITION, Server.SCOREBOARD_DISPLAY_OBJECTIVE, Server.ENTITY_METADATA,
+				Server.ATTACH_ENTITY, Server.ENTITY_VELOCITY, Server.ENTITY_EQUIPMENT, Server.EXPERIENCE, Server.UPDATE_HEALTH, Server.HELD_ITEM_SLOT, Server.SCOREBOARD_OBJECTIVE, Server.MOUNT,
+				Server.SET_PLAYER_INVENTORY, Server.SCOREBOARD_TEAM, Server.SCOREBOARD_SCORE, Server.SIMULATION_DISTANCE, Server.SET_SUBTITLE_TEXT, Server.UPDATE_TIME, Server.SET_TITLE_TEXT,
+				Server.SET_TITLE_ANIMATION, Server.ENTITY_SOUND, Server.NAMED_SOUND_EFFECT, Server.START_CONFIGURATION, Server.STOP_SOUND, Server.COOKIE_STORE, Server.SYSTEM_CHAT, Server.TAB_LIST,
+				Server.TAGS, Server.TAKE_ITEM_ENTITY, Server.ENTITY_TELEPORT, Server.TEST_INSTANCE_BLOCK_STATUS, Server.TICKING_STATE, Server.TICKING_STEP, Server.TRANSFERT, Server.ADVANCEMENTS,
+				Server.UPDATE_ATTRIBUTES, Server.ENTITY_EFFECT, Server.RECIPE_UPDATE, Server.TAG_UPDATE, Server.PROJECTILE_POWER, Server.CUSTOM_REPORT_DETAILS, Server.SERVER_LINKS, Server.WAYPOINT,
+				Server.DIALOG_CLEAR, Server.DIALOG_SHOW)) {
+			playOut.put(i++, type);
+		}
+		i = 0;
+		for (EntityType types : Arrays.asList(EntityType.ALLAY, EntityType.AREA_EFFECT_CLOUD, EntityType.ARMOR_STAND, EntityType.ARROW, EntityType.AXOLOTL, EntityType.BAT, EntityType.BEE,
+				EntityType.BLAZE, EntityType.BOAT, EntityType.CHEST_BOAT, EntityType.CAT, EntityType.CAVE_SPIDER, EntityType.CHICKEN, EntityType.COD, EntityType.COW, EntityType.CREEPER,
+				EntityType.DOLPHIN, EntityType.DONKEY, EntityType.DRAGON_FIREBALL, EntityType.DROWNED, EntityType.ELDER_GUARDIAN, EntityType.ENDER_CRYSTAL, EntityType.ENDER_DRAGON,
+				EntityType.ENDERMAN, EntityType.ENDERMITE, EntityType.EVOKER, EntityType.EVOKER_FANGS, EntityType.EXPERIENCE_ORB, EntityType.EYE_OF_ENDER, EntityType.FALLING_BLOCK,
+				EntityType.FIREWORK, EntityType.FOX, EntityType.FROG, EntityType.GHAST, EntityType.GIANT, EntityType.GLOW_ITEM_FRAME, EntityType.GLOW_SQUID, EntityType.GOAT, EntityType.GUARDIAN,
+				EntityType.HOGLIN, EntityType.HORSE, EntityType.HUSK, EntityType.ILLUSIONER, EntityType.IRON_GOLEM, EntityType.DROPPED_ITEM, EntityType.ITEM_FRAME, EntityType.FIREBALL,
+				EntityType.LEASH_KNOT, EntityType.LIGHTNING, EntityType.LLAMA, EntityType.LLAMA_SPIT, EntityType.MAGMA_CUBE, EntityType.MARKER, EntityType.MINECART, EntityType.MINECART_CHEST,
+				EntityType.MINECART_COMMAND_BLOCK, EntityType.MINECART_FURNACE, EntityType.MINECART_HOPPER, EntityType.MINECART_MOB_SPAWNER, EntityType.MINECART_TNT, EntityType.MULE,
+				EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PAINTING, EntityType.PANDA, EntityType.PARROT, EntityType.PHANTOM, EntityType.PIG, EntityType.PIGLIN, EntityType.PIGLIN_BRUTE,
+				EntityType.PILLAGER, EntityType.POLAR_BEAR, EntityType.PRIMED_TNT, EntityType.PUFFER_FISH, EntityType.RABBIT, EntityType.RAVAGER, EntityType.SALMON, EntityType.SHEEP,
+				EntityType.SHULKER, EntityType.SHULKER_BULLET, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SKELETON_HORSE, EntityType.SLIME, EntityType.SMALL_FIREBALL,
+				EntityType.SNOW_GOLEM, EntityType.SNOW_BALL, EntityType.SPECTRAL_ARROW, EntityType.SPIDER, EntityType.SQUID, EntityType.STRAY, EntityType.STRIDER, EntityType.TADPOLE, EntityType.EGG,
+				EntityType.ENDER_PEARL, EntityType.EXP_BOTTLE, EntityType.SPLASH_POTION, EntityType.TRIDENT, EntityType.LLAMA_TRADER, EntityType.TROPICAL_FISH, EntityType.TURTLE, EntityType.VEX,
+				EntityType.VILLAGER, EntityType.VINDICATOR, EntityType.WANDERING_TRADER, EntityType.WARDEN, EntityType.WITCH, EntityType.WITHER, EntityType.WITHER_SKELETON, EntityType.WITHER_SKULL,
+				EntityType.WOLF, EntityType.ZOGLIN, EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER, EntityType.PIG_ZOMBIE, EntityType.PLAYER, EntityType.FISHING_HOOK)) {
+			entityTypes.put(i++, types);
+		}
+		loadPostFlattening("/versions/v1_20_6/");
+
+		log();
+	}
+}

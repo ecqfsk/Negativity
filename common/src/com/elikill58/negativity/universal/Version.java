@@ -31,13 +31,14 @@ public enum Version {
 	V1_20_4("1.20.4", 20.4, Version1_20_4::new, 765),
 	V1_20_6("1.20.6", 20.5, Version1_20_6::new, 766),
 	V1_21("1.21", 21, Version1_21::new, 767),
-	V1_21_3("1.21.3", 21.3, Version1_21_3::new, 768),
-	V1_21_4("1.21.4", 21.4, Version1_21_4::new, 769),
-	V1_21_5("1.21.5", 21.5, Version1_21_6::new, 770),
-	V1_21_6("1.21.6", 21.6, Version1_21_6::new, 771),
-	V1_21_8("1.21.8", 21.8, Version1_21_8::new, 772),
-	V1_21_10("1.21.10", 21.10, Version1_21_8::new, 773),
-	HIGHER("higher", 42, VersionUnknown::new, 774, 1000);
+	V1_21_3("1.21.3", 21.03, Version1_21_03::new, 768),
+	V1_21_4("1.21.4", 21.04, Version1_21_04::new, 769),
+	V1_21_5("1.21.5", 21.05, Version1_21_06::new, 770),
+	V1_21_6("1.21.6", 21.06, Version1_21_06::new, 771),
+	V1_21_8("1.21.8", 21.08, Version1_21_08::new, 772),
+	V1_21_10("1.21.10", 21.10, Version1_21_11::new, 773),
+	V1_21_11("1.21.11", 21.11, Version1_21_11::new, 774),
+	HIGHER("higher", 42, VersionUnknown::new, 775, 1000);
 
 	private final double power;
 	private final int firstProtocolNumber, lastProtocolNumber;

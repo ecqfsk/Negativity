@@ -343,6 +343,22 @@ public interface PacketType {
 		CUSTOM_SOUND_EFFECT,
 		CUSTOM_REPORT_DETAILS,
 		DAMAGE_EVENT,
+		/**
+		 * Since 1.21.11
+		 */
+		DEBUG_BLOCK_VALUES,
+		/**
+		 * Since 1.21.11
+		 */
+		DEBUG_CHUNK_VALUE,
+		/**
+		 * Since 1.21.11
+		 */
+		DEBUG_ENTITY_VALUE,
+		/**
+		 * Since 1.21.11
+		 */
+		DEBUG_EVENT,
 		DEBUG_SAMPLE,
 		/**
 		 * Since 1.21.7

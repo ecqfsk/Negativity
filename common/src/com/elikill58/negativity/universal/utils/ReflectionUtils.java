@@ -116,4 +116,15 @@ public class ReflectionUtils {
 			return false;
 		}
 	}
+	
+	public static Field getFirstFieldFounded(Class<?> clazz, String... fieldNames) {
+		for(String name : fieldNames) {
+			try {
+				Field f = clazz.getDeclaredField(name);
+				if(f != null)
+					return f;
+			} catch (NoSuchFieldException e) {}
+		}
+		return null;
+	}
 }

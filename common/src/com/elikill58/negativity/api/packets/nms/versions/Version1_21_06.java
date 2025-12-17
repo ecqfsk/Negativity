@@ -7,20 +7,20 @@ import com.elikill58.negativity.api.packets.PacketType.Client;
 import com.elikill58.negativity.api.packets.PacketType.Server;
 import com.elikill58.negativity.api.packets.nms.NamedVersion;
 
-public class Version1_21_8 extends NamedVersion {
+public class Version1_21_06 extends NamedVersion {
 
-	public Version1_21_8() {
-		super("1.21.7");
+	public Version1_21_06() {
+		super("1.21.6");
 		int i = 0;
-		for (Client type : Arrays.asList(Client.TELEPORT_ACCEPT, Client.TILE_NBT_QUERY, Client.BUNDLE_ITEM_SELECTED, Client.DIFFICULTY_CHANGE, Client.GAMEMODE_CHANGE, Client.CHAT_ACK, Client.CHAT_COMMAND,
+		for (Client type : Arrays.asList(Client.TELEPORT_ACCEPT, Client.TILE_NBT_QUERY, Client.BUNDLE_ITEM_SELECTED, Client.DIFFICULTY_CHANGE, Client.CHAT_ACK, Client.CHAT_COMMAND,
 				Client.CHAT_COMMAND_SIGNED, Client.CHAT, Client.CHAT_SESSION_UPDATE, Client.CHUNK_BATCH_RECEIVED, Client.CLIENT_COMMAND, Client.TICK_END, Client.SETTINGS, Client.TAB_COMPLETE,
 				Client.CONFIGURATION_ACKNOWLEDGED, Client.ENCHANT_ITEM, Client.WINDOW_CLICK, Client.CLOSE_WINDOW, Client.SLOT_STATE_CHANGE, Client.COOKIE_RESPONSE, Client.CUSTOM_PAYLOAD,
 				Client.DEBUG_SAMPLE_SUBSCRIPTION, Client.BEDIT, Client.ENTITY_NBT_QUERY, Client.USE_ENTITY, Client.JIGSAW_GENERATE, Client.KEEP_ALIVE, Client.DIFFICULTY_LOCK, Client.POSITION,
 				Client.POSITION_LOOK, Client.LOOK, Client.GROUND, Client.VEHICLE_MOVE, Client.BOAT_MOVE, Client.PICK_ITEM, Client.PICK_ITEM_ENTITY, Client.PING, Client.AUTO_RECIPE, Client.ABILITIES,
 				Client.BLOCK_DIG, Client.ENTITY_ACTION, Client.STEER_VEHICLE, Client.PLAYER_LOADED, Client.PONG, Client.RECIPE_SETTINGS, Client.RECIPE_DISPLAYED, Client.ITEM_NAME,
 				Client.RESOURCE_PACK_STATUS, Client.ADVANCEMENTS, Client.TRADE_SELECT, Client.BEACON, Client.HELD_ITEM_SLOT, Client.SET_COMMAND_BLOCK, Client.SET_COMMAND_MINECART,
-				Client.SET_CREATIVE_SLOT, Client.SET_JIGSAW, Client.STRUCT, Client.SET_TEST_BLOCK, Client.UPDATE_SIGN, Client.ARM_ANIMATION, Client.TELEPORT_TO_ENTITY, Client.TEST_INSTANCE_BLOCK_ACTION,
-				Client.USE_ITEM, Client.BLOCK_PLACE, Client.CUSTOM_CLICK_ACTION)) {
+				Client.SET_CREATIVE_SLOT, Client.SET_JIGSAW, Client.STRUCT, Client.UPDATE_SIGN, Client.ARM_ANIMATION, Client.SPECTATE, Client.TELEPORT_TO_ENTITY, Client.TEST_INSTANCE_BLOCK_ACTION,
+				Client.USE_ITEM, Client.BLOCK_PLACE)) {
 			playIn.put(i++, type);
 		}
 		i = 0;
@@ -41,7 +41,7 @@ public class Version1_21_8 extends NamedVersion {
 				Server.SCOREBOARD_SCORE, Server.SIMULATION_DISTANCE, Server.SET_SUBTITLE_TEXT, Server.UPDATE_TIME, Server.SET_TITLE_TEXT, Server.SET_TITLE_ANIMATION, Server.ENTITY_SOUND,
 				Server.NAMED_SOUND_EFFECT, Server.START_CONFIGURATION, Server.STOP_SOUND, Server.COOKIE_STORE, Server.SYSTEM_CHAT, Server.TAB_LIST, Server.TAGS, Server.TAKE_ITEM_ENTITY,
 				Server.ENTITY_TELEPORT, Server.TEST_INSTANCE_BLOCK_STATUS, Server.TICKING_STATE, Server.TICKING_STEP, Server.TRANSFERT, Server.ADVANCEMENTS, Server.UPDATE_ATTRIBUTES,
-				Server.ENTITY_EFFECT, Server.RECIPE_UPDATE, Server.TAG_UPDATE, Server.PROJECTILE_POWER, Server.CUSTOM_REPORT_DETAILS, Server.SERVER_LINKS, Server.WAYPOINT, Server.DIALOG_CLEAR, Server.DIALOG_SHOW)) {
+				Server.ENTITY_EFFECT, Server.RECIPE_UPDATE, Server.TAG_UPDATE, Server.PROJECTILE_POWER, Server.CUSTOM_REPORT_DETAILS, Server.SERVER_LINKS)) {
 			playOut.put(i++, type);
 		}
 		i = 0;
