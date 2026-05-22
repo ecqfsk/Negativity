@@ -12,6 +12,7 @@ import com.elikill58.negativity.api.location.Location;
 import com.elikill58.negativity.api.protocols.Check;
 import com.elikill58.negativity.api.protocols.CheckConditions;
 import com.elikill58.negativity.common.protocols.data.GroundSpoofData;
+import com.elikill58.negativity.universal.MinecraftConstants;
 import com.elikill58.negativity.universal.Negativity;
 import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.detections.keys.CheatKeys;
@@ -44,7 +45,19 @@ public class GroundSpoof extends Cheat {
 			return;
 		}
 		double diffY = e.getTo().getY() - e.getFrom().getY();
-		if (diffY <= p.getWalkSpeed() || diffY == 0.1647732818260721) // specific value for MC 1.20.5
+		float fallDistance = p.getFallDistance();
+		if (diffY <= p.getWalkSpeed()
+				// MC produces step-up Y-deltas in the 0.164773... family across versions (1.20.5+):
+				// observed exact doubles include 0.1647732818260721 and 0.16477327999999858.
+				// Use a tolerance instead of strict equality to absorb new FP-noise variants without
+				// another patch each time.
+				|| Math.abs(diffY - 0.16477328) < 1.0e-6
+				// Half-block step (slab/stair edge) during a one-tick free-fall transient: server still
+				// reports onGround=true while motion.y has decremented by exactly GRAVITY for one tick.
+				// Repeatedly fired ~9 times in a row on normal sprint over slabs in 1.21.8.
+				|| (diffY == 0.5 && fallDistance <= MinecraftConstants.GRAVITY + 1e-6)
+				// Legit auto step-up (0.5 pre-1.20.5, 0.6 since); height is in MinecraftConstants.
+				|| diffY == MinecraftConstants.stepHeight(p.getPlayerVersion()))
 			return;
 		if (data.wasAlert)
 			Negativity.alertMod(ReportType.WARNING, p, this, getReliability(p), "check-blocks-under",

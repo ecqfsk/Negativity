@@ -256,7 +256,6 @@ public class MinestomPlayPackets {
 			clientPackets.put(clazz, null);
 		}
 
-		@SuppressWarnings("unchecked")
 		private static <T extends ClientPacket> void entry(Class<T> clazz, Function<T, NPacketPlayIn> writer) {
 			clientPackets.put(clazz, (Function<ClientPacket, NPacketPlayIn>) writer);
 		}
@@ -544,7 +543,6 @@ public class MinestomPlayPackets {
 			// serverPackets.put(clazz, null);
 		}
 
-		@SuppressWarnings("unchecked")
 		private static <T extends ServerPacket> void entry(Class<T> clazz, Function<T, NPacketPlayOut> writer) {
 		    serverPackets.put(clazz, (Function<ServerPacket, NPacketPlayOut>) writer);
 		}
