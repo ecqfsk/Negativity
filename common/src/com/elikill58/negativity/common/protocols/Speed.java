@@ -19,7 +19,9 @@ import com.elikill58.negativity.api.potion.PotionEffectType;
 import com.elikill58.negativity.api.protocols.Check;
 import com.elikill58.negativity.api.protocols.CheckConditions;
 import com.elikill58.negativity.common.protocols.data.SpeedData;
+import com.elikill58.negativity.universal.MinecraftConstants;
 import com.elikill58.negativity.universal.Negativity;
+import com.elikill58.negativity.universal.Version;
 import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.detections.keys.CheatKeys;
 import com.elikill58.negativity.universal.report.ReportType;
@@ -92,24 +94,28 @@ public class Speed extends Cheat implements Listeners {
 		blockLoc.setY(p.getBoundingBox().getMinY() - 1);
 		Block block = blockLoc.getBlock();
 
-		double friction = 0.91f, moveFactor = 0.026f;
+		// Mirrors EntityLiving.travel(): horizontal velocity = previous * friction + moveFactor.
+		// friction = AIR_FRICTION_XZ * blockFriction when on ground, else AIR_FRICTION_XZ.
+		// moveFactor on ground = walkSpeed * (1 + sprint_bonus) * (normalizer / friction^3).
+		double friction = MinecraftConstants.AIR_FRICTION_XZ;
+		// MC air state: moveRelative(AIR_MOVE_FACTOR, ...); the +30% sprint bonus is added inline.
+		double moveFactor = MinecraftConstants.AIR_MOVE_FACTOR * (1.0D + MinecraftConstants.SPRINT_SPEED_MULTIPLIER); // = 0.026
 		if (p.isOnGround()) {
 			friction *= block.getFriction();
 
 			moveFactor = p.getWalkSpeed();
 			if (p.hasPotionEffect(PotionEffectType.SPEED))
 				moveFactor += data.getSpeedModifier() - 1;
-			moveFactor += (moveFactor * 0.3F);
-			moveFactor *= (0.16277136F / (friction * friction * friction));
+			moveFactor += moveFactor * MinecraftConstants.SPRINT_SPEED_MULTIPLIER;
+			moveFactor *= (MinecraftConstants.walkSpeedNormalizer(Version.getVersion()) / (friction * friction * friction));
 
 			if (!flying.isGround && (np.delta.getY() > 0 || np.blockAbove > 0)) {
-				moveFactor += 0.2;
+				moveFactor += MinecraftConstants.SPRINT_JUMP_BOOST;
 				friction = 1F;
 			}
 		} else {
 			if (p.hasPotionEffect(PotionEffectType.SPEED))
 				moveFactor *= data.getSpeedModifier();
-			// return;
 		}
 
 		double predicted = data.deltaXZ * friction;

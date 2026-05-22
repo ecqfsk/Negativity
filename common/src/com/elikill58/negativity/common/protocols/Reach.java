@@ -22,6 +22,7 @@ import com.elikill58.negativity.api.protocols.Check;
 import com.elikill58.negativity.api.protocols.CheckConditions;
 import com.elikill58.negativity.common.protocols.data.ReachData;
 import com.elikill58.negativity.universal.Adapter;
+import com.elikill58.negativity.universal.MinecraftConstants;
 import com.elikill58.negativity.universal.Negativity;
 import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.detections.keys.CheatKeys;
@@ -66,7 +67,9 @@ public class Reach extends Cheat {
 			//p.sendMessage(ChatColor.color("&7Reach: " + getColoredDistance(dis) + "&7, basic: " + getColoredDistance(getDistanceBasic(p, cible)) + "&7, head: " + getColoredDistance(getDistanceHead(p, cible)) + "&7, nearest: " + getColoredDistance(getDistanceNearest(p, cible))));
 			recordData(p.getUniqueId(), HIT_DISTANCE, dis);
 			Adapter.getAdapter().debug(Debug.CHECK, "Distance between " + p.getName() + " and " + cible.getName() + ": " + dis);
-			double max = getConfig().getDouble("checks.reach-event.value", 3.2) + (p.getGameMode().equals(GameMode.CREATIVE) ? 1 : 0);
+			// MC ENTITY_REACH_SURVIVAL is 3.0; default 3.2 here adds 0.2 lag tolerance. Creative gets +1 (admin tooling).
+			double max = getConfig().getDouble("checks.reach-event.value", MinecraftConstants.ENTITY_REACH_SURVIVAL + 0.2D)
+					+ (p.getGameMode().equals(GameMode.CREATIVE) ? 1 : 0);
 			if (dis > max) {
 				if (Negativity.alertMod(ReportType.WARNING, p, this, parseInPorcent((dis - max) * 90), "reach-event",
 						"Exact distance: " + dis + ". Loc: " + loc.toString() + ", cible: " + cibleLocation,

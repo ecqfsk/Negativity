@@ -18,6 +18,14 @@ import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.report.ReportType;
 import com.elikill58.negativity.universal.utils.UniversalUtils;
 
+/**
+ * Spider (wall-climb) detector.
+ *
+ * <p>Y-delta filter values such as {@code 0.499..0.7} (jump range) and the bit-exact
+ * literals {@code 0.11837500000000034} / {@code 0.05000000000001137} come from observed
+ * vanilla physics outputs in edge cases (e.g. ladder rebound, bedrock jump residual).
+ * They are FP-patches and intentionally kept in their exact double form. Do not refactor.
+ */
 public class Spider extends Cheat {
 
 	public Spider() {

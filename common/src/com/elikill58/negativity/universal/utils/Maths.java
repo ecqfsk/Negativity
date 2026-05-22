@@ -1,9 +1,11 @@
 package com.elikill58.negativity.universal.utils;
 
+import com.elikill58.negativity.universal.MinecraftConstants;
+
 public class Maths {
-	
+
 	public static boolean isOnGround(final double y) {
-		return (y % 0.015625 == 0.0);
+		return MinecraftConstants.isGroundQuantized(y);
 	}
 	
 	public static int floor(double num) {

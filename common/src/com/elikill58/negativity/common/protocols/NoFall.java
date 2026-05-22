@@ -20,6 +20,7 @@ import com.elikill58.negativity.api.protocols.Check;
 import com.elikill58.negativity.api.protocols.CheckConditions;
 import com.elikill58.negativity.api.utils.LocationUtils;
 import com.elikill58.negativity.common.protocols.data.NoFallData;
+import com.elikill58.negativity.universal.MinecraftConstants;
 import com.elikill58.negativity.universal.Negativity;
 import com.elikill58.negativity.universal.Version;
 import com.elikill58.negativity.universal.detections.Cheat;
@@ -208,7 +209,7 @@ public class NoFall extends Cheat {
 		// boolean verticalCollision = difY != p.getVelocity().getY();
 		// boolean ownGroundBefore = verticalCollision && difY < 0.0;
 		Location locVelocity = to.clone().add(p.getVelocity()),
-				loc = locVelocity.clone().add(0, 0.08 + p.getPotionEffect(PotionEffectType.JUMP)
+				loc = locVelocity.clone().add(0, MinecraftConstants.GRAVITY + p.getPotionEffect(PotionEffectType.JUMP)
 						.orElse(new PotionEffect(PotionEffectType.JUMP, 0, 0)).getAmplifier() / 10, 0);
 		Material type = loc.getBlock().getType();
 		if (p.isOnGround() && !type.isSolid() && !p.isFlying() && Math.abs(p.getVelocity().getY()) <= Math.abs(difY)) {

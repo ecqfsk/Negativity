@@ -23,6 +23,7 @@ import com.elikill58.negativity.api.protocols.Check;
 import com.elikill58.negativity.api.protocols.CheckConditions;
 import com.elikill58.negativity.api.utils.LocationUtils;
 import com.elikill58.negativity.common.protocols.data.FlyData;
+import com.elikill58.negativity.universal.MinecraftConstants;
 import com.elikill58.negativity.universal.Negativity;
 import com.elikill58.negativity.universal.Version;
 import com.elikill58.negativity.universal.detections.Cheat;
@@ -143,7 +144,7 @@ public class Fly extends Cheat implements Listeners {
 	public void onGroundChecker(PacketReceiveEvent e, NegativityPlayer np, FlyData data) {
 		Player p = e.getPlayer();
 		if(p.getPlayerVersion().isNewerOrEquals(Version.V1_20))
-			return; // disable until the replacement of '0.015625' is not found
+			return; // Disabled on 1.20+: MC changed ground-position rounding; legacy GROUND_POSITION_QUANTUM no longer holds. TODO: find replacement.
 		NPacket packet = e.getPacket();
 		if (packet.getPacketType().equals(PacketType.Client.POSITION) || packet.getPacketType().equals(PacketType.Client.POSITION_LOOK)) {
 			NPacketPlayInFlying flying = (NPacketPlayInFlying) packet;

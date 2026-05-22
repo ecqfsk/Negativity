@@ -13,6 +13,7 @@ import com.elikill58.negativity.api.protocols.Check;
 import com.elikill58.negativity.api.protocols.CheckConditions;
 import com.elikill58.negativity.common.protocols.data.StepData;
 import com.elikill58.negativity.universal.Adapter;
+import com.elikill58.negativity.universal.MinecraftConstants;
 import com.elikill58.negativity.universal.Negativity;
 import com.elikill58.negativity.universal.Version;
 import com.elikill58.negativity.universal.detections.Cheat;
@@ -45,7 +46,9 @@ public class Step extends Cheat implements Listeners {
 		if (downId.contains("SHULKER"))
 			return;
 		double dif = to.getY() - from.getY();
-		if (dif > 0.45 && dif != 0.60 && p.getVelocity().getY() < 0.5) {
+		// Exclude legitimate auto step-up (MC's STEP_HEIGHT attribute): 0.5 before 1.20.5, 0.6 from 1.20.5+.
+		float legitStep = MinecraftConstants.stepHeight(p.getPlayerVersion());
+		if (dif > 0.45 && dif != legitStep && p.getVelocity().getY() < 0.5) {
 			boolean mayCancel = Negativity.alertMod(ReportType.WARNING, p, this, UniversalUtils.parseInPorcent(dif * 50), "dif", "Move " + dif + " blocks up, down: " + downId,
 					hoverMsg("main", "%block%", String.format("%.2f", dif)));
 			if (isSetBack() && mayCancel)
@@ -70,7 +73,8 @@ public class Step extends Cheat implements Listeners {
 			return;
 		double dif = to.getY() - from.getY();
 		double amplifier = (p.hasPotionEffect(PotionEffectType.JUMP) ? p.getPotionEffect(PotionEffectType.JUMP).get().getAmplifier() : 0);
-		double diffBoost = dif - (amplifier / 10) - p.getVelocity().getY();
+		// MC: each Jump Boost level adds JUMP_BOOST_PER_LEVEL (0.1) to initial Y velocity.
+		double diffBoost = dif - (amplifier * MinecraftConstants.JUMP_BOOST_PER_LEVEL) - p.getVelocity().getY();
 		if (diffBoost > 0.2) {
 			recordData(p.getUniqueId(), BLOCKS_UP, diffBoost);
 			if ((diffBoost > 0.5) && !(diffBoost <= 0.6 && diffBoost >= 0.56) // 0.56-0.6 is to bypass carpet and other

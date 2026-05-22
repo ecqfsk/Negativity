@@ -27,6 +27,15 @@ import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.report.ReportType;
 import com.elikill58.negativity.universal.utils.UniversalUtils;
 
+/**
+ * Jesus (walk-on-water) detector.
+ *
+ * <p>The Y-delta thresholds in {@code water-around} (e.g. {@code 0.0005}, {@code 0.08-0.1},
+ * {@code 0.3000-0.30001}) are not arbitrary: they are exact server-observed Y-deltas produced
+ * by specific vanilla situations (water bobbing, surface drag, FallDistance reset). They were
+ * tuned over multiple iterations to avoid false positives. Do not "round" or refactor them
+ * into named constants — their bit-exact form is load-bearing.
+ */
 public class Jesus extends Cheat implements Listeners {
 
 	public Jesus() {
