@@ -13,7 +13,6 @@ import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
 
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 
 public class VNegativityCommand implements SimpleCommand {
@@ -26,7 +25,7 @@ public class VNegativityCommand implements SimpleCommand {
 	public void execute(Invocation invocation) {
 		CommandSource source = invocation.source();
 		if (source instanceof Player && !Perm.hasPerm(NegativityPlayer.getCached(((Player) source).getUniqueId()), Perm.ADMIN)) {
-			source.sendMessage(Identity.nil(), Component.text(Messages.getMessage(((Player) source).getUniqueId(), "not_permission")));
+			source.sendMessage(Component.text(Messages.getMessage(((Player) source).getUniqueId(), "not_permission")));
 			return;
 		}
 		

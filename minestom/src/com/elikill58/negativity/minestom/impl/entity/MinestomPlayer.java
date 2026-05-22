@@ -73,7 +73,7 @@ public class MinestomPlayer extends AbstractPlayer implements Player {
 
 	@Override
 	public float getWalkSpeed() {
-		return (float) entity.getAttributeValue(Attribute.GENERIC_MOVEMENT_SPEED);
+		return (float) entity.getAttributeValue(Attribute.MOVEMENT_SPEED);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class MinestomPlayer extends AbstractPlayer implements Player {
 	
 	@Override
 	public double getMaxHealth() {
-		return entity.getAttributeValue(Attribute.GENERIC_MAX_HEALTH);
+		return entity.getAttributeValue(Attribute.MAX_HEALTH);
 	}
 	
 	@Override
@@ -123,7 +123,7 @@ public class MinestomPlayer extends AbstractPlayer implements Player {
 
 	@Override
 	public boolean hasPermission(String perm) {
-		return entity.hasPermission(perm) || isOp();
+		return isOp(); // TODO support direct perm check
 	}
 
 	@Override
@@ -219,12 +219,12 @@ public class MinestomPlayer extends AbstractPlayer implements Player {
 	
 	@Override
 	public void addPotionEffect(PotionEffectType type, int duration, int amplifier) {
-		entity.addEffect(new Potion(net.minestom.server.potion.PotionEffect.fromNamespaceId(type.getId()), (byte) amplifier, duration));
+		entity.addEffect(new Potion(net.minestom.server.potion.PotionEffect.fromKey(type.getId()), (byte) amplifier, duration));
 	}
 	
 	@Override
 	public void removePotionEffect(PotionEffectType type) {
-		entity.removeEffect(net.minestom.server.potion.PotionEffect.fromNamespaceId(type.getId()));
+		entity.removeEffect(net.minestom.server.potion.PotionEffect.fromKey(type.getId()));
 	}
 
 	@Override

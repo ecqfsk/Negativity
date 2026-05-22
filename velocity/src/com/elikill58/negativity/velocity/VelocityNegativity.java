@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -72,6 +73,7 @@ public class VelocityNegativity {
 		return container;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Subscribe
 	public void onProxyInitialization(ProxyInitializeEvent event) {
 		getLogger().info("Loading Negativity");
@@ -133,7 +135,7 @@ public class VelocityNegativity {
 		}
 
 		try {
-			URL url = new URL(MYSQL_DRIVER_URL);
+			URL url = new URI(MYSQL_DRIVER_URL).toURL();
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setUseCaches(true);
 			connection.setRequestProperty("User-Agent", "Negativity Velocity - " + container.getDescription().getVersion());
@@ -149,7 +151,7 @@ public class VelocityNegativity {
 					getLogger().error("The file won't be added to the classpath. This means database access might produce errors");
 				}
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			getLogger().error("Failed to download MYSQL driver", e);
 		}
 	}

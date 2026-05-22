@@ -3,11 +3,11 @@ package com.elikill58.negativity.minestom.impl.item;
 import org.jetbrains.annotations.NotNull;
 
 import net.minestom.server.item.enchant.Enchantment;
-import net.minestom.server.registry.DynamicRegistry;
+import net.minestom.server.registry.RegistryKey;
 
 public class MinestomEnchants {
 	
-	public static @NotNull DynamicRegistry.Key<Enchantment> getEnchant(com.elikill58.negativity.api.item.Enchantment enchant) {
+	public static @NotNull RegistryKey<Enchantment> getEnchant(com.elikill58.negativity.api.item.Enchantment enchant) {
 		switch (enchant) {
 		case AQUA_AFFINITY:
 			return Enchantment.AQUA_AFFINITY;

@@ -42,7 +42,7 @@ public class MinestomItemRegistrar extends ItemRegistrar {
 	}
 	
 	private @Nullable Material findMaterial(String key) {
-		net.minestom.server.item.Material m = net.minestom.server.item.Material.fromNamespaceId((key.contains(":") ? key : "minecraft:" + key).toLowerCase(Locale.ROOT));
+		net.minestom.server.item.Material m = net.minestom.server.item.Material.fromKey((key.contains(":") ? key : "minecraft:" + key).toLowerCase(Locale.ROOT));
 		return m == null ? null : new MinestomMaterial(m);
 	}
 }

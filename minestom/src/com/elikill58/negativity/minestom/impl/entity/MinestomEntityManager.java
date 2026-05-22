@@ -24,7 +24,7 @@ public class MinestomEntityManager {
 			return new MinestomIronGolem(e);
 		else if(e.getEntityType().equals(EntityType.ARROW))
 			return new MinestomArrow(e);
-		else if(e.getEntityType().equals(EntityType.POTION))
+		else if(e.getEntityType().equals(EntityType.SPLASH_POTION))
 			return new MinestomSplashPotion(e);
 		else
 			return new MinestomEntity<>(e);

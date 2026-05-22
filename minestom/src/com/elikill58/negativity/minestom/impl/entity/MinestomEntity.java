@@ -43,7 +43,7 @@ public class MinestomEntity<E extends Entity> extends AbstractEntity {
 	
 	@Override
 	public World getWorld() {
-		return World.getWorld(entity.getInstance().getUniqueId().toString(), a -> new MinestomWorld(entity.getInstance()));
+		return World.getWorld(entity.getInstance().getUuid().toString(), a -> new MinestomWorld(entity.getInstance()));
 	}
 
 	@Override
@@ -61,9 +61,10 @@ public class MinestomEntity<E extends Entity> extends AbstractEntity {
 		return entity;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public String getName() {
-		return entity.getCustomName() != null ? entity.getCustomName().examinableName() : entity.getEntityType().namespace().path();
+		return entity.getCustomName() != null ? entity.getCustomName().examinableName() : entity.getEntityType().asValue().name();
 	}
 	
 	@Override

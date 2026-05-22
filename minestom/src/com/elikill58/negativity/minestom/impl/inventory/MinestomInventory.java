@@ -11,12 +11,14 @@ import com.elikill58.negativity.api.item.ItemStack;
 import com.elikill58.negativity.api.item.Material;
 import com.elikill58.negativity.minestom.impl.item.MinestomItemStack;
 
+import net.minestom.server.inventory.PlayerInventory;
+
 public class MinestomInventory extends Inventory {
 
-	private net.minestom.server.inventory.Inventory inv;
+	private net.minestom.server.inventory.AbstractInventory inv;
 	private final NegativityHolder holder;
 	
-	public MinestomInventory(net.minestom.server.inventory.Inventory inv) {
+	public MinestomInventory(net.minestom.server.inventory.AbstractInventory inv) {
 		this.inv = inv;
 		this.holder = HolderById.getHolder(inv.getWindowId());
 	}
@@ -32,51 +34,55 @@ public class MinestomInventory extends Inventory {
 	
 	@Override
 	public InventoryType getType() {
-		switch(inv.getInventoryType()) {
-		case ANVIL:
-			return InventoryType.ANVIL;
-		case BEACON:
-			return InventoryType.BEACON;
-		case BLAST_FURNACE:
-			return InventoryType.BLAST_FURNACE;
-		case BREWING_STAND:
-			return InventoryType.BREWING;
-		case CARTOGRAPHY:
-			return InventoryType.CARTOGRAPHY;
-		case CHEST_1_ROW:
-		case CHEST_2_ROW:
-		case CHEST_3_ROW:
-		case CHEST_4_ROW:
-		case CHEST_5_ROW:
-		case CHEST_6_ROW:
-			return InventoryType.CHEST;
-		case CRAFTING:
-			return InventoryType.CRAFTING;
-		case ENCHANTMENT:
-			return InventoryType.ENCHANTING;
-		case FURNACE:
-			return InventoryType.FURNACE;
-		case GRINDSTONE:
-			return InventoryType.GRINDSTONE;
-		case HOPPER:
-			return InventoryType.HOPPER;
-		case LECTERN:
-			return InventoryType.LECTERN;
-		case LOOM:
-			return InventoryType.LOOM;
-		case MERCHANT:
-			return InventoryType.MERCHANT;
-		case SHULKER_BOX:
-			return InventoryType.SHULKER_BOX;
-		case SMITHING:
-			return InventoryType.SMITHING;
-		case SMOKER:
-			return InventoryType.SMOKER;
-		case STONE_CUTTER:
-			return InventoryType.STONECUTTER;
-		case CRAFTER_3X3:
-		case WINDOW_3X3:
+		if(inv instanceof PlayerInventory)
 			return InventoryType.PLAYER;
+		else if(inv instanceof net.minestom.server.inventory.Inventory mi) {
+			switch(mi.getInventoryType()) {
+			case ANVIL:
+				return InventoryType.ANVIL;
+			case BEACON:
+				return InventoryType.BEACON;
+			case BLAST_FURNACE:
+				return InventoryType.BLAST_FURNACE;
+			case BREWING_STAND:
+				return InventoryType.BREWING;
+			case CARTOGRAPHY:
+				return InventoryType.CARTOGRAPHY;
+			case CHEST_1_ROW:
+			case CHEST_2_ROW:
+			case CHEST_3_ROW:
+			case CHEST_4_ROW:
+			case CHEST_5_ROW:
+			case CHEST_6_ROW:
+				return InventoryType.CHEST;
+			case CRAFTING:
+				return InventoryType.CRAFTING;
+			case ENCHANTMENT:
+				return InventoryType.ENCHANTING;
+			case FURNACE:
+				return InventoryType.FURNACE;
+			case GRINDSTONE:
+				return InventoryType.GRINDSTONE;
+			case HOPPER:
+				return InventoryType.HOPPER;
+			case LECTERN:
+				return InventoryType.LECTERN;
+			case LOOM:
+				return InventoryType.LOOM;
+			case MERCHANT:
+				return InventoryType.MERCHANT;
+			case SHULKER_BOX:
+				return InventoryType.SHULKER_BOX;
+			case SMITHING:
+				return InventoryType.SMITHING;
+			case SMOKER:
+				return InventoryType.SMOKER;
+			case STONE_CUTTER:
+				return InventoryType.STONECUTTER;
+			case CRAFTER_3X3:
+			case WINDOW_3X3:
+				return InventoryType.PLAYER;
+			}
 		}
 		return InventoryType.CHEST;
 	}
@@ -113,7 +119,7 @@ public class MinestomInventory extends Inventory {
 
 	@Override
 	public String getInventoryName() {
-		return inv.getTitle().examinableName();
+		return inv instanceof net.minestom.server.inventory.Inventory mi ? mi.getTitle().examinableName() : null;
 	}
 
 	@Override
@@ -123,7 +129,7 @@ public class MinestomInventory extends Inventory {
 
 	@Override
 	public net.minestom.server.inventory.Inventory getDefault() {
-		return inv;
+		return inv instanceof net.minestom.server.inventory.Inventory mi ? mi : null;
 	}
 	
 	@Override

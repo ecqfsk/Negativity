@@ -35,6 +35,7 @@ import com.velocitypowered.api.util.ModInfo;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.ClickEvent.Payload;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 
@@ -148,7 +149,7 @@ public class VelocityListeners {
 			} else {
 				msg.hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT, Component.text(hover)));
 			}
-			return msg.clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, cmd)).build();
+			return msg.clickEvent(ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, Payload.string(cmd))).build();
 		}
 	}
 }

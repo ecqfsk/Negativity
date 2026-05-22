@@ -9,16 +9,18 @@ sourceSets {
     }
 }
 
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
 repositories {
     maven {
-        name 'velocity'
-        url 'https://nexus.velocitypowered.com/repository/maven-public/'
+        name 'papermc'
+        url 'https://repo.papermc.io/repository/maven-public/'
     }
 }
 
 dependencies {
     api project(':common')
-    compileOnly 'com.velocitypowered:velocity-api:3.1.1'
+    compileOnly 'com.velocitypowered:velocity-api:3.5.0-SNAPSHOT'
 }
 
 processResources {

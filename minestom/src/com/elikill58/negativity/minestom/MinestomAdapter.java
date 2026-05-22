@@ -271,6 +271,6 @@ public class MinestomAdapter extends Adapter {
 	@Override
 	public World getServerWorld(Player p) {
 		Instance i = MinecraftServer.getConnectionManager().getOnlinePlayerByUuid(p.getUniqueId()).getInstance();
-		return World.getWorld(i.getUniqueId().toString(), (a) -> new MinestomWorld(i));
+		return World.getWorld(i.getUuid().toString(), (a) -> new MinestomWorld(i));
 	}
 }

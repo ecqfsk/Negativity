@@ -17,12 +17,13 @@ import com.elikill58.negativity.api.item.Material;
 
 import net.kyori.adventure.text.Component;
 import net.minestom.server.component.DataComponent;
-import net.minestom.server.item.ItemComponent;
+import net.minestom.server.component.DataComponents;
 import net.minestom.server.item.ItemStack.Builder;
 import net.minestom.server.item.component.EnchantmentList;
 import net.minestom.server.item.component.HeadProfile;
-import net.minestom.server.item.component.Unbreakable;
-import net.minestom.server.registry.DynamicRegistry;
+import net.minestom.server.item.component.TooltipDisplay;
+import net.minestom.server.registry.RegistryKey;
+import net.minestom.server.utils.Unit;
 
 public class MinestomItemBuilder extends ItemBuilder {
 
@@ -31,7 +32,7 @@ public class MinestomItemBuilder extends ItemBuilder {
 	public MinestomItemBuilder(ItemStack def) {
 		net.minestom.server.item.ItemStack i = (net.minestom.server.item.ItemStack) def.getDefault();
 		this.item = net.minestom.server.item.ItemStack.builder(i.material());
-		for(DataComponent dc : ItemComponent.values()) {
+		for(DataComponent dc : DataComponent.values()) {
 			Object obj = i.get(dc);
 			if(obj != null)
 				this.item.set(dc, obj);
@@ -44,18 +45,18 @@ public class MinestomItemBuilder extends ItemBuilder {
 	
 	public MinestomItemBuilder(OfflinePlayer owner) {
 		this.item = net.minestom.server.item.ItemStack.builder(net.minestom.server.item.Material.PLAYER_HEAD);
-		this.item.set(ItemComponent.PROFILE, new HeadProfile(owner.getName(), owner.getUniqueId(), Collections.emptyList()));
+		this.item.set(DataComponents.PROFILE, new HeadProfile(owner.getName(), owner.getUniqueId(), Collections.emptyList()));
 	}
 
 	@Override
 	public ItemBuilder displayName(String displayName) {
-		item.set(ItemComponent.ITEM_NAME, Component.text(ChatColor.WHITE + displayName));
+		item.set(DataComponents.ITEM_NAME, Component.text(ChatColor.WHITE + displayName));
 		return this;
 	}
 
 	@Override
 	public ItemBuilder resetDisplayName() {
-		item.set(ItemComponent.ITEM_NAME, Component.empty());
+		item.set(DataComponents.ITEM_NAME, Component.empty());
 		return this;
 	}
 
@@ -66,9 +67,9 @@ public class MinestomItemBuilder extends ItemBuilder {
 
 	@Override
 	public ItemBuilder enchant(Enchantment enchantment, int level) {
-		Map<DynamicRegistry.Key<net.minestom.server.item.enchant.Enchantment>, Integer> enchantments = new HashMap<>();
+		Map<RegistryKey<net.minestom.server.item.enchant.Enchantment>, Integer> enchantments = new HashMap<>();
 		enchantments.put(MinestomEnchants.getEnchant(enchantment), level);
-		item.set(ItemComponent.ENCHANTMENTS, new EnchantmentList(enchantments, false));
+		item.set(DataComponents.ENCHANTMENTS, new EnchantmentList(enchantments));
 		return this;
 	}
 	
@@ -77,13 +78,11 @@ public class MinestomItemBuilder extends ItemBuilder {
 		for(ItemFlag flag : itemFlag) {
 			switch (flag) {
 			case HIDE_ENCHANTS:
-				item.set(ItemComponent.HIDE_TOOLTIP, null);
-				break;
 			case HIDE_ATTRIBUTES:
-				item.set(ItemComponent.HIDE_ADDITIONAL_TOOLTIP, null);
+				item.set(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.EMPTY);
 				break;
 			case HIDE_UNBREAKABLE:
-				item.set(ItemComponent.UNBREAKABLE, Unbreakable.DEFAULT);
+				item.set(DataComponents.UNBREAKABLE, Unit.INSTANCE);
 				break;
 			}
 		}
@@ -103,7 +102,7 @@ public class MinestomItemBuilder extends ItemBuilder {
 
 	@Override
 	public ItemBuilder color(com.elikill58.negativity.api.colors.DyeColor color) {
-		item.set(ItemComponent.DAMAGE, (int) color.getDye());
+		item.set(DataComponents.DAMAGE, (int) color.getDye());
 		return this;
 	}
 
@@ -113,7 +112,7 @@ public class MinestomItemBuilder extends ItemBuilder {
 		for(String line : lore)
 			for(String part : line.split("\n"))
 				result.add(Component.text(part));
-		item.set(ItemComponent.LORE, result);
+		item.set(DataComponents.LORE, result);
 		return this;
 	}
 

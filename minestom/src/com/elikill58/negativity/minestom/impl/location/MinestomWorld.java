@@ -26,7 +26,7 @@ public class MinestomWorld extends World {
 
 	@Override
 	public String getName() {
-		return w.getUniqueId().toString();
+		return w.getDimensionName();
 	}
 
 	@Override

@@ -82,9 +82,9 @@ public class PlayersListeners {
 				e.setCancelled(event.isCancelled());
 		}
 	}*/
-	
+
 	public void onPreLogin(AsyncPlayerPreLoginEvent e) {
-		LoginEvent event = new LoginEvent(e.getPlayerUuid(), e.getUsername(), Result.ALLOWED, null, null);
+		LoginEvent event = new LoginEvent(e.getGameProfile().uuid(), e.getGameProfile().name(), Result.ALLOWED, null, null);
 		EventManager.callEvent(event);
 		// TODO fix address null & few changes
 	}

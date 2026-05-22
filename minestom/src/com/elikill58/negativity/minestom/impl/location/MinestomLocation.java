@@ -10,11 +10,11 @@ import net.minestom.server.instance.Instance;
 public class MinestomLocation {
 
 	public static Location toCommon(Instance w, Pos loc){
-		return new Location(w == null ? null : World.getWorld(w.getUniqueId().toString(), a -> new MinestomWorld(w)), loc.x(), loc.y(), loc.z());
+		return new Location(w == null ? null : World.getWorld(w.getUuid().toString(), a -> new MinestomWorld(w)), loc.x(), loc.y(), loc.z());
 	}
 
 	public static Location toCommon(Instance w, Point loc){
-		return new Location(w == null ? null : World.getWorld(w.getUniqueId().toString(), a -> new MinestomWorld(w)), loc.x(), loc.y(), loc.z());
+		return new Location(w == null ? null : World.getWorld(w.getUuid().toString(), a -> new MinestomWorld(w)), loc.x(), loc.y(), loc.z());
 	}
 
 	public static Pos fromCommon(Location loc){
