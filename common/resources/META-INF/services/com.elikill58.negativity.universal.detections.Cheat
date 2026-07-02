@@ -35,6 +35,12 @@ com.elikill58.negativity.common.protocols.Strafe
 com.elikill58.negativity.common.protocols.Spider
 com.elikill58.negativity.common.protocols.Step
 com.elikill58.negativity.common.protocols.SuperKnockback
+com.elikill58.negativity.common.protocols.Bhop
+com.elikill58.negativity.common.protocols.BoatFly
+com.elikill58.negativity.common.protocols.WTap
+com.elikill58.negativity.common.protocols.AutoArmor
+com.elikill58.negativity.common.protocols.CommandSpam
+com.elikill58.negativity.common.protocols.IllegalItems
 com.elikill58.negativity.common.protocols.Timer
 com.elikill58.negativity.common.protocols.UnexpectedPacket
 com.elikill58.negativity.common.protocols.XRay

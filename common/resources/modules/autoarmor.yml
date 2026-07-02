@@ -1,0 +1,42 @@
+# Equipping armour faster than humanly possible
+
+# The display name of cheat
+name: "AutoArmor"
+
+# enable/disable detection
+active: true
+
+# Maximum of ping to be verified.
+# It's to prevent lagging player
+ping: 200
+
+# The minimum porcent to create reliability
+reliability_alert: 60
+
+# Manage the kick of players
+kick:
+  active: false
+  # Required alert to kick player
+  alert: 5
+
+# Remove the cheat effect
+set_back:
+  active: false
+  # To know how to configure, check this wiki :
+  # https://github.com/Elikill58/Negativity/wiki/setBack
+  action: []
+
+# Option for /negativity verif
+verif:
+  # Enable/disable the detection when the verification is enabled
+  check_in_verif: true
+
+# Consecutive fast armour equips before creating an alert
+streak_alert: 2
+
+# Disable one check and not all detections
+checks:
+  # Equipping armour faster than humanly possible
+  fast-swap:
+    active: true
+    suspicious-ms: 120

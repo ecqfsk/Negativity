@@ -1,0 +1,41 @@
+# Chained jumps keeping high speed (bunny hop)
+
+# The display name of cheat
+name: "Bhop"
+
+# enable/disable detection
+active: true
+
+# Maximum of ping to be verified.
+# It's to prevent lagging player
+ping: 200
+
+# The minimum porcent to create reliability
+reliability_alert: 60
+
+# Manage the kick of players
+kick:
+  active: false
+  # Required alert to kick player
+  alert: 5
+
+# Remove the cheat effect
+set_back:
+  active: false
+  # To know how to configure, check this wiki :
+  # https://github.com/Elikill58/Negativity/wiki/setBack
+  action: []
+
+# Option for /negativity verif
+verif:
+  # Enable/disable the detection when the verification is enabled
+  check_in_verif: true
+
+# Amount of chained jumps before creating an alert
+chained_jump_alert: 4
+
+# Disable one check and not all detections
+checks:
+  # Chained jumps keeping high speed
+  chained-jump:
+    active: true
