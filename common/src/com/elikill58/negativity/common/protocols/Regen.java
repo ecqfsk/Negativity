@@ -65,7 +65,8 @@ public class Regen extends Cheat implements Listeners {
 				&& (data.lastRegen != System.currentTimeMillis() && Version.getVersion().isNewerOrEquals(Version.V1_14))
 				&& !p.getWorld().getDifficulty().equals(Difficulty.PEACEFUL)) {
 			int ping = p.getPing();
-			if (dif + ping < 5) {
+			// fastest legit regen is 500ms (saturation, 1.14+): anything under max_time_ms is a cheat
+			if (dif + ping < getConfig().getInt("checks.time.max_time_ms", 100)) {
 				boolean mayCancel = Negativity.alertMod(ReportType.WARNING, p, this,
 						UniversalUtils.parseInPorcent(200 - dif - ping), "time", "Player regen, last regen: "
 						+ data.lastRegen + " Actual time: " + actual + " Difference: " + dif + "ms",

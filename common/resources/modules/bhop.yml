@@ -34,8 +34,12 @@ verif:
 # Amount of chained jumps before creating an alert
 chained_jump_alert: 4
 
+# Horizontal speed (blocks/tick) above which a jump is suspicious.
+# Vanilla sprint-jumping tops out around 0.4646 on flat ground: keep this above it.
+max_jump_speed: 0.5
+
 # Disable one check and not all detections
 checks:
-  # Chained jumps keeping high speed
+  # Chained jumps above vanilla speed
   chained-jump:
     active: true

@@ -52,10 +52,10 @@ public class InventoryMove extends Cheat implements Listeners {
 		double distance = e.getFrom().distance(e.getTo());
 		double distanceXZ = e.getFrom().distanceXZ(e.getTo());
 		if (distanceXZ >= data.distanceXZ && distanceXZ >= p.getWalkSpeed()) // if running at least at the same
-			amount += (data.distanceXZ - distanceXZ) + 1; // +1 to always have alert
-		
+			amount += (distanceXZ - data.distanceXZ) + 1; // +1 to always have alert
+
 		if(distance >= data.distance && distance >= p.getWalkSpeed() && p.getFallDistance() < 0.5) // fall "allow" to make the distance goes brr
-			amount += (data.distanceXZ - distanceXZ) + 1 - p.getFallDistance();
+			amount += (distance - data.distance) + 1 - p.getFallDistance();
 		if(data.timeSinceOpen > 2)
 			Adapter.getAdapter().debug(Debug.CHECK, "Time: " + data.timeSinceOpen + ", amount: " + amount);
 		if (data.timeSinceOpen >= 3 && amount > 2) {

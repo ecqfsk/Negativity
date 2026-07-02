@@ -87,11 +87,6 @@ public class Reach extends Cheat {
 		BoundingBox bb1 = p.getBoundingBox(), bb2 = et.getBoundingBox();
 		return bb1.getAsHeadPoint().distance(bb2.getIntersectPoint(p));
 	}
-	
-	protected double getDistanceNearest(Player p, Entity et) {
-		BoundingBox bb1 = p.getBoundingBox(), bb2 = et.getBoundingBox();
-		return bb1.getNearestPoint(bb2.getMid()).distance(bb2.getNearestPoint(bb2.getMid()));
-	}
 
 	private double getDistance(Location loc, Location other) {
 		double width = 0.403125;

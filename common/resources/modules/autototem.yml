@@ -31,14 +31,12 @@ verif:
   # Enable/disable the detection when the verification is enabled
   check_in_verif: true
 
-# Ticks to wait after a resurrection before re-checking the off-hand
+# Ticks to wait after a resurrection before re-checking the consumed hand (1 tick = 50ms).
+# A totem back in the consumed hand within this delay cannot be a human action.
 check_ticks: 1
-
-# Max delay (ms) for an off-hand totem refill to be considered inhuman
-suspicious_ms: 120
 
 # Disable one check and not all detections
 checks:
-  # Off-hand totem refilled faster than humanly possible
+  # Consumed-hand totem refilled faster than humanly possible
   instant-refill:
     active: true

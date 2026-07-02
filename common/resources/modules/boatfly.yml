@@ -31,11 +31,11 @@ verif:
   # Enable/disable the detection when the verification is enabled
   check_in_verif: true
 
-# Consecutive upward ticks in a boat before creating an alert
-ascend_alert: 5
+# Consecutive vehicle-move packets with only air under the boat before checking fall/height
+air_ticks_alert: 12
 
 # Disable one check and not all detections
 checks:
-  # Gaining altitude while riding a boat
+  # Boat staying airborne or gaining height
   boat-ascend:
     active: true

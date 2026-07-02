@@ -29,7 +29,7 @@ public class NoWeb extends Cheat {
 		if(p.hasPotionEffect(PotionEffectType.SPEED) || p.getFallDistance() > 1)
 			return;
 		Location from = e.getFrom();
-		Location to = e.getFrom();
+		Location to = e.getTo();
 		double distance = to.distance(from);
 		Block under = p.getWorld().getBlockAt((from.getX() + to.getX()) / 2, ((from.getY() + to.getY()) / 2) - 1, (from.getZ() + to.getZ()) / 2);
 		if (under.getType() == WEB && distance > (p.getWalkSpeed() * 0.17)) { //&& distance > 0.13716039608514914) {

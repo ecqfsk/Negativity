@@ -9,7 +9,7 @@ import com.elikill58.negativity.api.item.Enchantment;
 import com.elikill58.negativity.api.item.ItemStack;
 import com.elikill58.negativity.api.item.Materials;
 import com.elikill58.negativity.api.protocols.Check;
-import com.elikill58.negativity.common.protocols.data.EmptyData;
+import com.elikill58.negativity.common.protocols.data.IllegalItemsData;
 import com.elikill58.negativity.universal.Negativity;
 import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.report.ReportType;
@@ -18,17 +18,28 @@ import com.elikill58.negativity.universal.report.ReportType;
  * IllegalItems detector.
  *
  * <p>Flags items that cannot exist in survival: over-enchanted gear (enchant level above
- * the configured vanilla maximum) and over-stacked items (amount above 64). Scans the
- * held item and worn armour whenever the player interacts.
+ * the configured maximum) and over-stacked items (amount above the configured limit).
+ * Scans the held item and worn armour on interaction, at most once per second per player
+ * (a full scan is ~5 items x all enchantments — no need to repeat it every click).
+ *
+ * <p>Servers distributing custom over-enchanted gear (crates, shops, admin items) should
+ * raise {@code max_enchant_level} accordingly to avoid false positives.
  */
 public class IllegalItems extends Cheat {
 
+	private static final long SCAN_INTERVAL_MS = 1000L;
+
 	public IllegalItems() {
-		super(ILLEGAL_ITEMS, CheatCategory.PLAYER, Materials.BOOK, EmptyData::new);
+		super(ILLEGAL_ITEMS, CheatCategory.PLAYER, Materials.BOOK, IllegalItemsData::new);
 	}
 
 	@Check(name = "illegal", description = "Over-enchanted or over-stacked items")
-	public void onInteract(PlayerInteractEvent e, NegativityPlayer np) {
+	public void onInteract(PlayerInteractEvent e, NegativityPlayer np, IllegalItemsData data) {
+		long now = System.currentTimeMillis();
+		if (now - data.lastScan < SCAN_INTERVAL_MS)
+			return;
+		data.lastScan = now;
+
 		Player p = e.getPlayer();
 		int maxLevel = getConfig().getInt("max_enchant_level", 5);
 		int maxAmount = getConfig().getInt("max_stack_amount", 64);

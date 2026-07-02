@@ -39,3 +39,5 @@ checks:
   # Time between 2 regen
   time:
     active: true
+    # Max delay (ms, ping included) between 2 regens to flag; fastest legit regen is 500ms
+    max_time_ms: 100

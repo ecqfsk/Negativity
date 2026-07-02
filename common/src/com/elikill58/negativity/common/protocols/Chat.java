@@ -133,7 +133,7 @@ public class Chat extends Cheat implements Listeners {
 		double percent = upperCase / msg.length() * 100.0D;
 		Adapter.getAdapter().debug(Debug.CHECK, "Message: " + msg + ", upper: " + upperCase + ", percent: " + percent);
 		if(percent >= getConfig().getDouble("checks.caps.percent", 70)) {
-			if(Negativity.alertMod(ReportType.WARNING, p, this, (int) percent, "caps", "Message: " + msg + ", percent: " + percent, new CheatHover.Literal("Caps message: " + msg + " (" + String.format("%.2f", percent) + "% caps)"), (long) (upperCase - 5)) && isSetBack()) {
+			if(Negativity.alertMod(ReportType.WARNING, p, this, (int) percent, "caps", "Message: " + msg + ", percent: " + percent, new CheatHover.Literal("Caps message: " + msg + " (" + String.format("%.2f", percent) + "% caps)"), (long) Math.max(1, upperCase - 5)) && isSetBack()) {
 				e.setCancelled(true);
 			}
 		}

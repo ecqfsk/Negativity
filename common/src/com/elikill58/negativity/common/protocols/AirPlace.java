@@ -50,6 +50,6 @@ public class AirPlace extends Cheat {
 
 		boolean mayCancel = Negativity.alertMod(ReportType.WARNING, p, this, 100, "block-around", "Blocks: " + blockNames.toString(), new CheatHover.Literal("Any block around the placed block"), 2);
 		if(mayCancel && isSetBack())
-			e.setCancelled(false);
+			e.setCancelled(true);
 	}
 }

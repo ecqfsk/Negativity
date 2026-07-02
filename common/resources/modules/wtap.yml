@@ -31,8 +31,9 @@ verif:
   # Enable/disable the detection when the verification is enabled
   check_in_verif: true
 
-# Sprint toggles allowed within the sliding window before creating an alert
-toggle_alert: 14
+# Sprint toggles per second (while in fight) before creating an alert.
+# Legit players manage ~3-5 toggles/sec; only counted during combat.
+toggle_alert: 8
 
 # Disable one check and not all detections
 checks:

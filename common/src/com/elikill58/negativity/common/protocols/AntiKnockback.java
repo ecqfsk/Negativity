@@ -204,13 +204,16 @@ public class AntiKnockback extends Cheat {
 	private static boolean hasCeilingForLoc(Player player, Location loc) {
 		if (loc.getBlock().getType().isSolid())
 			return true;
-		else if (loc.getX() > 0.66 && loc.getBlock().getRelative(BlockFace.EAST).getType().isSolid())
+		// use the position INSIDE the block (0..1): absolute world coordinates would make
+		// these edge checks always true anywhere away from x/z = 0
+		double fx = loc.getX() - Math.floor(loc.getX()), fz = loc.getZ() - Math.floor(loc.getZ());
+		if (fx > 0.66 && loc.getBlock().getRelative(BlockFace.EAST).getType().isSolid())
 			return true;
-		else if (loc.getX() < -0.66 && loc.getBlock().getRelative(BlockFace.WEST).getType().isSolid())
+		else if (fx < 0.34 && loc.getBlock().getRelative(BlockFace.WEST).getType().isSolid())
 			return true;
-		else if (loc.getZ() > 0.66 && loc.getBlock().getRelative(BlockFace.SOUTH).getType().isSolid())
+		else if (fz > 0.66 && loc.getBlock().getRelative(BlockFace.SOUTH).getType().isSolid())
 			return true;
-		else if (loc.getZ() < -0.66 && loc.getBlock().getRelative(BlockFace.NORTH).getType().isSolid())
+		else if (fz < 0.34 && loc.getBlock().getRelative(BlockFace.NORTH).getType().isSolid())
 			return true;
 		return false;
 	}

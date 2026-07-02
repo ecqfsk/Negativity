@@ -31,7 +31,8 @@ verif:
   # Enable/disable the detection when the verification is enabled
   check_in_verif: true
 
-# Highest enchant level considered legal (above it = illegal)
+# Highest enchant level considered legal (above it = illegal).
+# WARNING: raise this if your server gives custom over-enchanted items (crates, shops...)
 max_enchant_level: 5
 
 # Highest stack amount considered legal (above it = illegal)

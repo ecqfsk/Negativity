@@ -51,9 +51,12 @@ public class XRay extends Cheat {
 		if(type == null)
 			return;
 		int minedType = 0, fullMined = mine.getFullMined();
+		if (fullMined <= 0)
+			return;
 		for (int i : mine.getMined().values())
 			minedType += i;
-		int relia = minedType / fullMined;
+		// percentage of ores among all mined blocks (integer division alone would always give 0 or 1)
+		int relia = minedType * 100 / fullMined;
 		Negativity.alertMod(ReportType.WARNING, p, this, relia, "minerate",
 				type.getOreName() + " mined. Full mined: " + fullMined + ". Mined by type: " + mine,
 				hoverMsg("main", "%name%", type.getName(), "%nb%", mine.getMinerateType(type)));
@@ -85,7 +88,9 @@ public class XRay extends Cheat {
 							: checkForBuildDir.getBlock().getLocation().distance(p.getLocation());
 
 					Location loc = b.getLocation();
-					double blockDistance = blockResult.getBlock().getLocation().distance(p.getLocation());
+					// getBlock() is null when the ray found nothing: same guard as distanceWithBuild above
+					double blockDistance = blockResult.getBlock() == null ? Double.MAX_VALUE
+							: blockResult.getBlock().getLocation().distance(p.getLocation());
 					if (blockResult.getRayResult().equals(RayResult.NEEDED_FOUND)
 							&& blockResult.hasBlockExceptSearched() && blockDistance > 2 && distanceWithBuild < 500) {
 						if (data.miningLoc != null && blockIsJustAround(loc, data.miningLoc)) {

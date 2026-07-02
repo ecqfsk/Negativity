@@ -3,12 +3,11 @@ package com.elikill58.negativity.common.protocols.data;
 import com.elikill58.negativity.api.NegativityPlayer;
 import com.elikill58.negativity.api.protocols.CheckData;
 
-public class BoatFlyData extends CheckData {
+public class IllegalItemsData extends CheckData {
 
-	public int airTicks = 0;
-	public double startY = 0;
+	public long lastScan = 0;
 
-	public BoatFlyData(NegativityPlayer np) {
+	public IllegalItemsData(NegativityPlayer np) {
 		super(np);
 	}
 }

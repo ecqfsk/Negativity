@@ -6,8 +6,8 @@ import com.elikill58.negativity.api.protocols.CheckData;
 public class WTapData extends CheckData {
 
 	public boolean lastSprint = false;
+	public long windowStart = 0;
 	public int toggles = 0;
-	public int moveCounter = 0;
 
 	public WTapData(NegativityPlayer np) {
 		super(np);

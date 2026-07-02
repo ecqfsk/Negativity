@@ -41,7 +41,10 @@ public class FastPlace extends Cheat implements Listeners {
 			data.times.add(diff);
 			double sum = (double) data.times.stream().mapToInt(Integer::intValue).sum() / data.times.size();
 			if (data.times.size() > 2 && sum < getConfig().getDouble("checks.time.time_ticks", 3) && diff < 5) {
-					boolean mayCancel = Negativity.alertMod(ReportType.WARNING, p, this, UniversalUtils.parseInPorcent(100 - diff * (1 / sum)), "time",
+					// sum == 0 means instant placements (the worst case): 1/sum would give Infinity/NaN
+					// and a garbage reliability that gets gated, letting the most flagrant cheat through
+					int reliability = sum == 0 ? 100 : UniversalUtils.parseInPorcent(100 - diff * (1 / sum));
+					boolean mayCancel = Negativity.alertMod(ReportType.WARNING, p, this, reliability, "time",
 							"Diff: " + diff + ", times: " + data.times);
 					if (isSetBack() && mayCancel)
 						e.setCancelled(true);

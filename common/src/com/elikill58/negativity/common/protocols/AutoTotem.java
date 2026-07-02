@@ -20,12 +20,13 @@ import com.elikill58.negativity.universal.utils.UniversalUtils;
 /**
  * AutoTotem detector.
  *
- * <p>When a totem of undying saves a player, its slot is emptied that tick. A human needs
- * reaction time to move a new totem back into the off-hand; an AutoTotem client refills it
- * within a tick. We snapshot the off-hand at resurrection (should be empty, the totem was
- * just consumed) and re-check it a few ticks later: an empty-&gt;totem transition faster than
- * the configured threshold is inhuman. Comparing before/after avoids flagging players who
- * simply hold a second totem in the main hand.
+ * <p>Timing matters: when the resurrection event fires, the consumed totem is STILL in the
+ * player's hand — it is removed right after the event. Vanilla consumes the main hand first
+ * if it holds a totem, otherwise the off-hand. So we note which hand is about to be emptied
+ * and re-check that same hand shortly after: if it holds a totem again within check_ticks
+ * ticks (~50ms each), no human moved it there. Checking the consumed hand only avoids
+ * flagging players who legitimately hold a spare totem in the other hand, and stacked
+ * (non-vanilla) totems are skipped since the hand would not empty at all.
  */
 public class AutoTotem extends Cheat {
 
@@ -33,24 +34,28 @@ public class AutoTotem extends Cheat {
 		super(AUTO_TOTEM, CheatCategory.COMBAT, Materials.GOLDEN_APPLE, EmptyData::new);
 	}
 
-	@Check(name = "instant-refill", description = "Off-hand totem refilled faster than humanly possible")
+	@Check(name = "instant-refill", description = "Consumed-hand totem refilled faster than humanly possible")
 	public void onResurrect(EntityResurrectionEvent e, NegativityPlayer np) {
 		Player p = e.getPlayer();
-		boolean hadTotemBefore = isTotem(p.getItemInOffHand());
-		long resurrectedAt = System.currentTimeMillis();
-		int checkTicks = getConfig().getInt("check_ticks", 1);
-		long suspiciousMs = getConfig().getInt("suspicious_ms", 120);
+		boolean mainHad = isTotem(p.getItemInHand());
+		boolean offHad = isTotem(p.getItemInOffHand());
+		if (!mainHad && !offHad)
+			return; // no visible totem (plugin-driven resurrection): no baseline to compare
+		boolean consumedMain = mainHad; // vanilla consumes the main hand first
+		ItemStack consumed = consumedMain ? p.getItemInHand() : p.getItemInOffHand();
+		if (consumed.getAmount() > 1)
+			return; // non-vanilla stacked totems: the hand will not empty, undetectable
 
+		int checkTicks = getConfig().getInt("check_ticks", 1);
 		Scheduler.getInstance().runEntityDelayed(p, () -> {
 			if (!p.isOnline())
 				return;
-			if (!hadTotemBefore && isTotem(p.getItemInOffHand())) {
-				long elapsed = System.currentTimeMillis() - resurrectedAt;
-				if (elapsed <= suspiciousMs) {
-					int reliability = UniversalUtils.parseInPorcent(85 + (suspiciousMs - elapsed) / 4);
-					Negativity.alertMod(ReportType.WARNING, p, this, reliability, "instant-refill",
-							"Off-hand totem refilled " + elapsed + "ms after resurrection (max " + suspiciousMs + "ms)");
-				}
+			ItemStack handNow = consumedMain ? p.getItemInHand() : p.getItemInOffHand();
+			if (isTotem(handNow)) {
+				int reliability = UniversalUtils.parseInPorcent(90 + (checkTicks <= 1 ? 8 : 0));
+				Negativity.alertMod(ReportType.WARNING, p, this, reliability, "instant-refill",
+						"Totem back in " + (consumedMain ? "main hand" : "off hand") + " " + checkTicks
+								+ " tick(s) after resurrection");
 			}
 		}, checkTicks);
 	}
