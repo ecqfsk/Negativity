@@ -36,6 +36,21 @@ jobs:
       - name: Run common tests
         run: ./gradlew common:test --stacktrace
 
+      - name: Publish test summary
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          # Gradle writes JUnit XML here for every test task.
+          files: |
+            **/build/test-results/test/*.xml
+          # Render results in the workflow Summary panel + a Check on the commit.
+          # Do not fail the workflow here even if tests failed — the gradle step already did that.
+          comment_mode: off
+          check_name: Unit tests
+          report_individual_runs: true
+          # Skip annotations to keep the PR UI tidy; the summary table is enough.
+          annotations_limit: 0
+
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
