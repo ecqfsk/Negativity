@@ -25,6 +25,7 @@ import com.elikill58.negativity.universal.account.NegativityAccount;
 import com.elikill58.negativity.universal.detections.Cheat;
 import com.elikill58.negativity.universal.report.ReportType;
 import com.elikill58.negativity.universal.storage.account.NegativityAccountStorage;
+import com.elikill58.negativity.universal.utils.UniversalUtils;
 
 public class XRay extends Cheat {
 
@@ -63,55 +64,81 @@ public class XRay extends Cheat {
 		NegativityAccountStorage.getStorage().saveAccount(acc);
 	}
 
-	@Check(name = "mining-direction", description = "Check mining direction of player")
+	/**
+	 * Lucky-turn detection: a legit miner digs blind, so when his tunnel changes direction
+	 * the odds that the new direction points at a HIDDEN rare ore are low. An xray user sees
+	 * ores through the walls and turns precisely toward them, so nearly every direction
+	 * change is "lucky". We track the digging direction from consecutively broken blocks,
+	 * and on each significant turn we ray-cast along the new direction looking for an
+	 * important ore that is not visible (hidden behind other blocks). Alert when enough
+	 * turns were made and the lucky ratio is beyond what chance explains.
+	 */
+	@Check(name = "mining-direction", description = "Suspiciously lucky mining turns toward hidden rare ores")
 	public void onBlockBreak(BlockBreakEvent e, NegativityPlayer np, XRayData data) {
 		Player p = e.getPlayer();
 		Block b = e.getBlock();
-
+		Material type = b.getType();
+		if (!MINING_BLOCK.contains(type) && !ORES.contains(type))
+			return; // not underground mining
 		long time = System.currentTimeMillis();
-		boolean isMining = (time - data.mining) < TIME_MINING;
-		if (ORES.contains(b.getType())) {
-			data.miningOre = 3;
-		} else {
-			if (data.miningOre > 0) {
-				if (isMining) {
-					// search for ore
-					BlockRayResult blockResult = new BlockRayBuilder(p)
-							.neededType(IMPORTANT_ORES.toArray(new Material[0])).build().compile();
-
-					Location playerLoc = p.getLocation().clone();
-					playerLoc.setY(b.getY());
-					Vector v = p.getRotation().setY(b.getY());
-					BlockRayResult checkForBuildDir = new BlockRayBuilder(playerLoc, v.multiply(new Vector(-1, 1, -1)))
-							.maxDistance(10).build().compile();
-					double distanceWithBuild = checkForBuildDir.getBlock() == null ? Double.MAX_VALUE
-							: checkForBuildDir.getBlock().getLocation().distance(p.getLocation());
-
-					Location loc = b.getLocation();
-					// getBlock() is null when the ray found nothing: same guard as distanceWithBuild above
-					double blockDistance = blockResult.getBlock() == null ? Double.MAX_VALUE
-							: blockResult.getBlock().getLocation().distance(p.getLocation());
-					if (blockResult.getRayResult().equals(RayResult.NEEDED_FOUND)
-							&& blockResult.hasBlockExceptSearched() && blockDistance > 2 && distanceWithBuild < 500) {
-						if (data.miningLoc != null && blockIsJustAround(loc, data.miningLoc)) {
-							Negativity.alertMod(ReportType.WARNING, p, this, 80, "mining-direction",
-									"Found " + blockResult.getType() + ", timeMining: " + data.miningOre
-											+ ", blockDistance: " + blockDistance + ", distanceWithBuild: "
-											+ distanceWithBuild);
-						}
-						data.miningLoc = loc;
-					} else
-						data.miningOre--;
-				} else
-					data.miningOre--;
-			}
+		Location loc = b.getLocation();
+		boolean sameSession = (time - data.mining) < TIME_MINING && data.lastBreakLoc != null
+				&& data.lastBreakLoc.getWorld().getName().equals(loc.getWorld().getName())
+				&& data.lastBreakLoc.distance(loc) < 3;
+		data.mining = time;
+		if (!sameSession) {
+			// new tunnel (or teleport/world change): restart direction tracking
+			data.lastBreakLoc = loc;
+			data.hasDir = false;
+			return;
 		}
-		if (MINING_BLOCK.contains(b.getType()))
-			data.mining = time;
-	}
 
-	private boolean blockIsJustAround(Location loc1, Location loc2) {
-		return (loc1.getBlockX() - loc2.getBlockX() <= 1) && (loc1.getBlockY() - loc2.getBlockY() <= 1)
-				&& (loc1.getBlockZ() - loc2.getBlockZ() <= 1);
+		double dx = loc.getX() - data.lastBreakLoc.getX(), dy = loc.getY() - data.lastBreakLoc.getY(),
+				dz = loc.getZ() - data.lastBreakLoc.getZ();
+		double length = Math.sqrt(dx * dx + dy * dy + dz * dz);
+		data.lastBreakLoc = loc;
+		if (length == 0)
+			return;
+		dx /= length;
+		dy /= length;
+		dz /= length;
+		if (!data.hasDir) {
+			data.dirX = dx;
+			data.dirY = dy;
+			data.dirZ = dz;
+			data.hasDir = true;
+			return;
+		}
+		// cos of the angle between the previous and the new digging direction
+		double cos = dx * data.dirX + dy * data.dirY + dz * data.dirZ;
+		data.dirX = dx;
+		data.dirY = dy;
+		data.dirZ = dz;
+		if (cos >= getConfig().getDouble("checks.mining-direction.turn_cos", 0.7))
+			return; // still digging (roughly) straight: turns are the signal, not the tunnel
+
+		data.totalTurns++;
+		// does the NEW direction point at a rare ore hidden behind other blocks?
+		int luckyDistance = getConfig().getInt("checks.mining-direction.lucky_distance", 6);
+		BlockRayResult ray = new BlockRayBuilder(loc.clone().add(0.5, 0.5, 0.5), new Vector(dx, dy, dz))
+				.neededType(IMPORTANT_ORES.toArray(new Material[0])).maxDistance(luckyDistance).build().compile();
+		boolean lucky = ray.getBlock() != null && ray.getRayResult().equals(RayResult.NEEDED_FOUND)
+				&& ray.hasBlockExceptSearched(); // hidden = the ore was NOT visible from the tunnel
+		if (lucky)
+			data.luckyTurns++;
+
+		int minTurns = getConfig().getInt("checks.mining-direction.min_turns", 5);
+		if (data.totalTurns < minTurns)
+			return; // sample too small to say anything about luck
+		int ratio = data.luckyTurns * 100 / data.totalTurns;
+		if (ratio >= getConfig().getInt("checks.mining-direction.lucky_percent", 60)) {
+			Negativity.alertMod(ReportType.WARNING, p, this, UniversalUtils.parseInPorcent(ratio), "mining-direction",
+					"Lucky turns: " + data.luckyTurns + "/" + data.totalTurns + " (" + ratio + "%)"
+							+ (lucky ? ", last found: " + ray.getType().getId() : ""),
+					hoverMsg("main", "%name%", lucky ? ray.getType().getId() : "?", "%nb%", data.luckyTurns));
+			// halve instead of clearing: keep watching without spamming every following turn
+			data.luckyTurns /= 2;
+			data.totalTurns /= 2;
+		}
 	}
 }

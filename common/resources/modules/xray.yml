@@ -46,6 +46,14 @@ checks:
   # Count minerate
   minerate:
     active: true
-  # Check mining direction with ray
+  # Suspiciously lucky mining turns toward hidden rare ores
   mining-direction:
     active: true
+    # Cos of the angle between two digging directions under which it counts as a turn (0.7 = ~45 degrees)
+    turn_cos: 0.7
+    # How far (blocks) to search for a hidden rare ore along the new direction
+    lucky_distance: 6
+    # Minimum direction changes before judging the luck ratio
+    min_turns: 5
+    # Percent of lucky turns to create an alert (legit blind mining stays far below)
+    lucky_percent: 60
