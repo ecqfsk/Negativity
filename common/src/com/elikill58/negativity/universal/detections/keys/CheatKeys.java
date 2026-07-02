@@ -46,6 +46,7 @@ public enum CheatKeys implements IDetectionKey<CheatKeys> {
 	SPIDER("SPIDER"),
 	STEP("STEP"),
 	SUPER_KNOCKBACK("SUPERKNOCKBACK"),
+	AUTO_TOTEM("AUTOTOTEM", Version.V1_11),
 	BHOP("BHOP"),
 	BOAT_FLY("BOATFLY"),
 	WTAP("WTAP"),

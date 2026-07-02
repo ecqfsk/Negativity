@@ -24,6 +24,7 @@ import com.elikill58.negativity.spigot.listeners.EntityListeners;
 import com.elikill58.negativity.spigot.listeners.InventoryListeners;
 import com.elikill58.negativity.spigot.listeners.PacketListeners;
 import com.elikill58.negativity.spigot.listeners.PlayersListeners;
+import com.elikill58.negativity.spigot.listeners.ResurrectionListeners;
 import com.elikill58.negativity.spigot.nms.SpigotVersionAdapter;
 import com.elikill58.negativity.spigot.utils.Utils;
 import com.elikill58.negativity.universal.Adapter;
@@ -86,6 +87,8 @@ public class SpigotNegativity extends JavaPlugin {
 		pm.registerEvents(new PacketListeners(), this);
 		if (v.isNewerOrEquals(Version.V1_9))
 			pm.registerEvents(new ElytraListeners(), this);
+		if (v.isNewerOrEquals(Version.V1_11))
+			pm.registerEvents(new ResurrectionListeners(), this);
 
 		Messenger messenger = getServer().getMessenger();
 		ChannelListeners channelListeners = new ChannelListeners();

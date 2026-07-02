@@ -35,4 +35,11 @@ public class EntityListeners {
 	public void onDismount(RideEntityEvent.Dismount e, @First Player player) {
 		EventManager.callEvent(new EntityDismountEvent(SpongeEntityManager.getEntity(player), SpongeEntityManager.getEntity(e.getTargetEntity())));
 	}
+
+	// TODO AutoTotem: Sponge API 7 exposes no resurrection/totem event (only DamageEntityEvent).
+	// To feed the AutoTotem check, fire EntityResurrectionEvent from a DamageEntityEvent whose
+	// final damage would be lethal while the player holds a totem:
+	//   EntityResurrectionEvent event = new EntityResurrectionEvent(SpongeEntityManager.getPlayer(p));
+	//   EventManager.callEvent(event);
+	//   if (event.isCancelled()) e.setCancelled(true);
 }

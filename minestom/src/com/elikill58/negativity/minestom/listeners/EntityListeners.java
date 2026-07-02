@@ -30,4 +30,8 @@ public class EntityListeners {
 	public void onProjectileHit(ProjectileCollideWithEntityEvent e) {
 		EventManager.callEvent(new ProjectileHitEvent(MinestomEntityManager.getEntity(e.getEntity())));
 	}
+
+	// TODO AutoTotem: Minestom core has no totem-of-undying resurrection event. If totem behaviour
+	// is added (e.g. via a custom EntityDamageEvent handler that survives lethal damage), fire:
+	//   EventManager.callEvent(new EntityResurrectionEvent(MinestomEntityManager.getPlayer(player)));
 }
