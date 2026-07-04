@@ -12,6 +12,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.ItemStack;
@@ -35,7 +36,7 @@ public class GlobalPlayerOfflineInventory extends AbstractInventory<CheckMenuOff
 	public void openInventory(Player p, Object... args) {
 		OfflinePlayer cible = (OfflinePlayer) args[0];
 		Inventory inv = Inventory.createInventory(Inventory.NAME_CHECK_MENU, 27, new CheckMenuOfflineHolder(cible));
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 		NegativityAccount account = NegativityAccount.get(cible.getUniqueId());
 		Minerate minerate = account.getMinerate();
 		/*int betterClick = account.getMostClicksPerSecond();

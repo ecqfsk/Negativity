@@ -7,6 +7,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.Material;
@@ -27,7 +28,7 @@ public class ModInventory extends AbstractInventory<ModHolder> {
 	@Override
 	public void openInventory(Player p, Object... obj) {
 		Inventory inv = Inventory.createInventory(Inventory.NAME_MOD_MENU, 27, new ModHolder());
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 
 		inv.set(10, ItemBuilder.Builder(Materials.GHAST_TEAR).displayName(Messages.getMessage(p, "inventory.mod.night_vision")).build());
 		inv.set(11, ItemBuilder.Builder(Materials.PUMPKIN_PIE).displayName(Messages.getMessage(p, "inventory.mod.invisible")).build());

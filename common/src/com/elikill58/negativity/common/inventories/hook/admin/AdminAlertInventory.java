@@ -5,6 +5,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.Material;
@@ -24,7 +25,7 @@ public class AdminAlertInventory extends AbstractInventory<AdminAlertHolder> {
 	public void openInventory(Player p, Object... args) {
 		AdminAlertHolder holder = new AdminAlertHolder();
 		Inventory inv = Inventory.createInventory(Messages.getMessage(p, "inventory.alerts.shower.manage"), 27, holder);
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 		
 		int slot = 10;
 		for(AlertSender sender : AlertSender.getAllAlertSender()) {

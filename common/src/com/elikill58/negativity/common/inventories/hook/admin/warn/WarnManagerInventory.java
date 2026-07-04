@@ -4,6 +4,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.Enchantment;
 import com.elikill58.negativity.api.item.ItemBuilder;
@@ -26,7 +27,7 @@ public class WarnManagerInventory extends AbstractInventory<WarnManagerHolder> {
 	@Override
 	public void openInventory(Player p, Object... obj) {
 		Inventory inv = Inventory.createInventory(Inventory.BAN_MANAGER_MENU, 27, new WarnManagerHolder());
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 
 		inv.set(0, Inventory.EMPTY_RED);
 		inv.set(8, Inventory.getBackItem(p));

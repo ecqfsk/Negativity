@@ -6,6 +6,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.Material;
@@ -29,7 +30,7 @@ public class ForgeModsInventory extends AbstractInventory<ForgeModsHolder> {
 		slot = 0;
 		NegativityPlayer np = NegativityPlayer.getNegativityPlayer(cible);
 		Inventory inv = Inventory.createInventory(Inventory.NAME_FORGE_MOD_MENU, UniversalUtils.getMultipleOf(np.mods.size() + 1, 9, 1, 54), new ForgeModsHolder(cible));
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 		if(np.mods.size() == 0) {
 			inv.set(4, ItemBuilder.Builder(Materials.DIAMOND).displayName("No mods").build());
 		} else {

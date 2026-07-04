@@ -4,6 +4,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.Material;
@@ -21,7 +22,7 @@ public class AdminInventory extends AbstractInventory<AdminHolder> {
 	@Override
 	public void openInventory(Player p, Object... obj) {
 		Inventory inv = Inventory.createInventory(Inventory.ADMIN_MENU, 18, new AdminHolder());
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 		inv.set(8, Inventory.getCloseItem(p));
 
 		inv.set(0, ItemBuilder.Builder(Materials.TNT).displayName(Messages.getMessage(p, "inventory.mod.cheat_manage")).build());

@@ -4,6 +4,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.Material;
@@ -23,7 +24,7 @@ public class OneSpecialInventory extends AbstractInventory<OneSpecialHolder> {
 	public void openInventory(Player p, Object... args){
 		Special s = (Special) args[0];
 		Inventory inv = Inventory.createInventory(s.getName(), 9, new OneSpecialHolder(s));
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 		inv.set(0, ItemBuilder.Builder(s.getMaterial()).displayName(s.getName()).build());
 		actualizeInventory(p, s, inv);
 		

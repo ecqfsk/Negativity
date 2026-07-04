@@ -7,6 +7,7 @@ import com.elikill58.negativity.api.entity.Player;
 import com.elikill58.negativity.api.events.inventory.InventoryClickEvent;
 import com.elikill58.negativity.api.inventory.AbstractInventory;
 import com.elikill58.negativity.api.inventory.Inventory;
+import com.elikill58.negativity.api.inventory.GuiTheme;
 import com.elikill58.negativity.api.inventory.InventoryManager;
 import com.elikill58.negativity.api.item.ItemBuilder;
 import com.elikill58.negativity.api.item.Material;
@@ -28,7 +29,7 @@ public class BanProcessorManagerInventory extends AbstractInventory<BanProcessor
 	public void openInventory(Player p, Object... obj) {
 		BanProcessorManagerHolder holder = new BanProcessorManagerHolder();
 		Inventory inv = Inventory.createInventory(Inventory.BAN_MANAGER_MENU, UniversalUtils.getMultipleOf(BanManager.getProcessors().size() + 3, 9, 1, 54), holder);
-		InventoryUtils.fillInventory(inv, Inventory.EMPTY);
+		GuiTheme.applyFrame(inv);
 		int slot = 0;
 		for(Entry<String, BanProcessor> entries : new HashMap<>(BanManager.getProcessors()).entrySet()) {
 			BanProcessor proc = entries.getValue();
