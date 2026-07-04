@@ -382,6 +382,7 @@ public interface PacketType {
 		EXPERIENCE,
 		EXPLOSION(NPacketPlayOutExplosion::new),
 		GAME_STATE_CHANGE,
+		GAME_TEST_HIGHLIGHT,
 		HELD_ITEM_SLOT,
 		HIT_ANIMATION,
 		HURT_ANIMATION,

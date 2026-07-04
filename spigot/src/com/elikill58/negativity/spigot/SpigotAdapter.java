@@ -158,7 +158,8 @@ public class SpigotAdapter extends Adapter {
 	@Override
 	public double getLastTPS() {
 		double[] tps = getTPS();
-		return tps[tps.length - 1];
+		// version adapters read TPS reflectively and can yield null/empty right after startup
+		return tps == null || tps.length == 0 ? 20 : tps[tps.length - 1];
 	}
 
 	@Override

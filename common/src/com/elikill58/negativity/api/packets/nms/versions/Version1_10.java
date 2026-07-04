@@ -103,7 +103,6 @@ public class Version1_10 extends NamedVersion {
 		entityTypes.put(120, EntityType.VILLAGER);
 		entityTypes.put(200, EntityType.ENDER_CRYSTAL);
 		
-		log();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.elikill58.negativity.api.packets.packet.playout;
 import java.util.UUID;
 
 import com.elikill58.negativity.api.entity.EntityType;
+import com.elikill58.negativity.api.location.Vector;
 import com.elikill58.negativity.api.packets.PacketType;
 import com.elikill58.negativity.api.packets.nms.PacketSerializer;
 import com.elikill58.negativity.api.packets.packet.NPacketPlayOut;
@@ -49,7 +50,14 @@ public class NPacketPlayOutSpawnEntity implements NPacketPlayOut {
 			this.pitch = serializer.readByte() * 256.0F / 360.0F;
 			k = serializer.readInt();
 		}
-		if (k > 0) {
+		if (version.isNewerOrEquals(Version.V1_21_10)) {
+			// 1.21.9+ always sends the velocity, packed as a low-precision Vec3 (blocks/tick);
+			// scaled to 1/8000 blocks/tick to keep the historical unit of the mod* fields
+			Vector vec = serializer.readLpVec3();
+			this.modX = vec.getX() * 8000;
+			this.modY = vec.getY() * 8000;
+			this.modZ = vec.getZ() * 8000;
+		} else if (k > 0) {
 			this.modX = serializer.readShort();
 			this.modY = serializer.readShort();
 			this.modZ = serializer.readShort();

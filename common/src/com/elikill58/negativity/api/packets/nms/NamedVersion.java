@@ -40,7 +40,7 @@ public abstract class NamedVersion {
 	protected final Int2ObjectMap<EntityType> entityTypes = new Int2ObjectOpenHashMap<>();
 	protected final Int2ObjectMap<Material> materials = new Int2ObjectOpenHashMap<>();
 	protected final Int2ObjectMap<String> materialNameEntities = new Int2ObjectOpenHashMap<>();
-	protected final String name;
+	protected String name;
 
 	public NamedVersion(String name) {
 		this.name = name;
@@ -57,6 +57,16 @@ public abstract class NamedVersion {
 
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Rename this packet table. Used when the same table serves several game versions
+	 * (e.g. 1.21.10 and 1.21.11): the display name follows the actual server version.
+	 *
+	 * @param name the display name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void log() {

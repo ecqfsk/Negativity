@@ -129,6 +129,12 @@ public enum Version {
 			if(version == null) {
 				try {
 					this.version = versionCreator.call();
+					// several game versions can share one packet-table class: name the table
+					// after the actual version that loads it (HIGHER/LOWER keep their own name,
+					// e.g. the raw server version string of VersionUnknown)
+					if (this != HIGHER && this != LOWER)
+						version.setName(getName());
+					version.log();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -155,10 +161,22 @@ public enum Version {
 	 */
 	public static Version getVersionByName(String name) {
 		name = name.toLowerCase(Locale.ROOT).replace("R", "");
-		for (Version v : Version.values())
-			if (name.startsWith(v.getName().toLowerCase(Locale.ROOT)) || name.startsWith(v.name().toLowerCase(Locale.ROOT)))
-				return v;
-		return HIGHER;
+		// keep the LONGEST matching prefix: with a first-match loop, "1.21.11" would stop
+		// on V1_21 ("1.21") and "1.21.10"/"1.21.11" could never be returned
+		Version found = null;
+		int foundLength = 0;
+		for (Version v : Version.values()) {
+			String byName = v.getName().toLowerCase(Locale.ROOT), byEnum = v.name().toLowerCase(Locale.ROOT);
+			if (name.startsWith(byName) && byName.length() > foundLength) {
+				found = v;
+				foundLength = byName.length();
+			}
+			if (name.startsWith(byEnum) && byEnum.length() > foundLength) {
+				found = v;
+				foundLength = byEnum.length();
+			}
+		}
+		return found == null ? HIGHER : found;
 	}
 	
 	/**

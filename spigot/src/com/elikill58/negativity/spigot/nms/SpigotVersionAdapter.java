@@ -43,6 +43,7 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 
 			Class<?> mcServer = PacketUtils.getNmsClass("MinecraftServer", "server.");
 			recentTpsField = ReflectionUtils.getFirstFieldFounded(mcServer, "recentTps", "tps");
+			recentTpsField.setAccessible(true);
 			tpsField = mcServer.getDeclaredField(getTpsFieldName());
 			tpsField.setAccessible(true);
 
@@ -144,13 +145,18 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 	public double[] getTps() {
 		if (SpigotNegativity.getSubPlatform().equals(SubPlatform.FOLIA)) {
 			try {
-				return (double[]) Bukkit.class.getDeclaredMethod("getTPS").invoke(null);
+				double[] tps = (double[]) Bukkit.class.getDeclaredMethod("getTPS").invoke(null);
+				if (tps != null && tps.length > 0)
+					return tps;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		try {
-			return (double[]) recentTpsField.get(dedicatedServer);
+			// the field can legitimately contain null (or be empty) right after server startup,
+			// and casting null does NOT throw: guard instead of relying on the catch below
+			double[] tps = (double[]) recentTpsField.get(dedicatedServer);
+			return tps == null || tps.length == 0 ? new double[] { 20, 20, 20 } : tps;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new double[] { 20, 20, 20 };
@@ -169,7 +175,7 @@ public abstract class SpigotVersionAdapter extends VersionAdapter<Player> {
 	public Object getNetworkManager(Player p) {
 		try {
 			Object playerConnection = getPlayerConnection(p);
-			return new PacketContent(playerConnection).getSpecificModifier(PacketUtils.getNmsClass(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) ? "Connection" : "NetworkManager", "network.")).readSafely(0);
+			return new PacketContent(playerConnection).getSpecificModifier(PacketUtils.getNmsClass(SubPlatform.getSubPlatform().equals(SubPlatform.FOLIA) || Version.getVersion().isNewerOrEquals(Version.V1_21_11) ? "Connection" : "NetworkManager", "network.")).readSafely(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

@@ -23,7 +23,13 @@ public class NPacketPlayOutEntityVelocity implements NPacketPlayOut {
 	@Override
 	public void read(PacketSerializer serializer, Version version) {
 		this.entityId = serializer.readVarInt();
-		this.vec = serializer.readShortVector();
+		if (version.isNewerOrEquals(Version.V1_21_10)) {
+			// 1.21.9+ packs the velocity as a low-precision Vec3 (blocks/tick) instead of
+			// 3 shorts: scale to 1/8000 blocks/tick so consumers keep the historical unit
+			this.vec = serializer.readLpVec3().multiply(new Vector(8000, 8000, 8000));
+		} else {
+			this.vec = serializer.readShortVector();
+		}
 	}
 
 	@Override

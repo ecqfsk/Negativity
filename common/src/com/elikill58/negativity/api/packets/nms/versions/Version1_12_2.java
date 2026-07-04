@@ -118,7 +118,6 @@ public class Version1_12_2 extends NamedVersion {
 		entityTypes.put(120, EntityType.VILLAGER);
 		entityTypes.put(200, EntityType.ENDER_CRYSTAL);
 		
-		log();
 	}
 
 	@Override

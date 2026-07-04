@@ -10,7 +10,7 @@ import com.elikill58.negativity.api.packets.nms.NamedVersion;
 public class Version1_21_11 extends NamedVersion {
 
 	public Version1_21_11() {
-		super("1.21.10");
+		super("1.21.10/1.21.11"); // same packet table for both: protocol 773 and 774 share the IDs
 		int i = 0;
 		for (Client type : Arrays.asList(Client.TELEPORT_ACCEPT, Client.TILE_NBT_QUERY, Client.BUNDLE_ITEM_SELECTED, Client.DIFFICULTY_CHANGE, Client.GAMEMODE_CHANGE, Client.CHAT_ACK,
 				Client.CHAT_COMMAND, Client.CHAT_COMMAND_SIGNED, Client.CHAT, Client.CHAT_SESSION_UPDATE, Client.CHUNK_BATCH_RECEIVED, Client.CLIENT_COMMAND, Client.TICK_END, Client.SETTINGS,
@@ -24,12 +24,12 @@ public class Version1_21_11 extends NamedVersion {
 			playIn.put(i++, type);
 		}
 		i = 0;
-		for (Server type : Arrays.asList(Server.SPAWN_ENTITY, Server.ANIMATION, Server.STATISTIC, Server.BLOCK_CHANGED_ACK, Server.BLOCK_BREAK_ANIMATION, Server.TILE_ENTITY_DATA, Server.BLOCK_ACTION,
+		for (Server type : Arrays.asList(Server.BUNDLE, Server.SPAWN_ENTITY, Server.ANIMATION, Server.STATISTIC, Server.BLOCK_CHANGED_ACK, Server.BLOCK_BREAK_ANIMATION, Server.TILE_ENTITY_DATA, Server.BLOCK_ACTION,
 				Server.BLOCK_CHANGE, Server.BOSS, Server.SERVER_DIFFICULTY, Server.CHUNK_BATCH_FINISHED, Server.CHUNK_BATCH_STARTED, Server.CHUNK_BIOMES, Server.CLEAR_TITLE, Server.TAB_COMPLETE,
 				Server.COMMANDS, Server.CLOSE_WINDOW, Server.WINDOW_ITEMS, Server.WINDOW_DATA, Server.SET_SLOT, Server.COOKIE_REQUEST, Server.SET_COOLDOWN, Server.CHAT_CUSTOM_COMPLETION,
 				Server.CUSTOM_PAYLOAD, Server.DAMAGE_EVENT, Server.DEBUG_BLOCK_VALUES, Server.DEBUG_CHUNK_VALUE, Server.DEBUG_ENTITY_VALUE, Server.DEBUG_EVENT, Server.DEBUG_SAMPLE, Server.CHAT_DELETE,
 				Server.KICK_DISCONNECT, Server.CHAT_DISGUISED, Server.ENTITY_STATUS, Server.ENTITY_POSITION_SYNC, Server.EXPLOSION, Server.UNLOAD_CHUNK, Server.GAME_STATE_CHANGE,
-				Server.OPEN_WINDOW_HORSE, Server.HURT_ANIMATION, Server.INITIALIZE_BORDER, Server.KEEP_ALIVE, Server.LEVEL_CHUNK_LIGHT, Server.WORLD_EVENT, Server.WORLD_PARTICLES, Server.LIGHT_UPDATE,
+				Server.GAME_TEST_HIGHLIGHT, Server.OPEN_WINDOW_HORSE, Server.HURT_ANIMATION, Server.INITIALIZE_BORDER, Server.KEEP_ALIVE, Server.LEVEL_CHUNK_LIGHT, Server.WORLD_EVENT, Server.WORLD_PARTICLES, Server.LIGHT_UPDATE,
 				Server.LOGIN, Server.MAP, Server.OPEN_WINDOW_MERCHANT, Server.REL_ENTITY_MOVE, Server.REL_ENTITY_MOVE_LOOK, Server.MOVE_MINECART_ALONG_TRACK, Server.REL_ENTITY_LOOK,
 				Server.VEHICLE_MOVE, Server.OPEN_BOOK, Server.OPEN_WINDOW, Server.OPEN_SIGN_EDITOR, Server.PING, Server.PONG, Server.RECIPE_PLACE_GHOST, Server.ABILITIES, Server.CHAT,
 				Server.COMBAT_END_EVENT, Server.COMBAT_ENTER_EVENT, Server.COMBAT_KILL_EVENT, Server.PLAYER_INFO_REMOVE, Server.PLAYER_INFO_UPDATE, Server.LOOK_AT, Server.POSITION, Server.ROTATION,
@@ -65,6 +65,5 @@ public class Version1_21_11 extends NamedVersion {
 		}
 		loadPostFlattening("/versions/v1_20_6/");
 
-		log();
 	}
 }

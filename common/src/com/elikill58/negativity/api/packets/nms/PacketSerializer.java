@@ -282,6 +282,31 @@ public class PacketSerializer extends UnpooledHeapByteBuf {
 		return new Vector(readShort(), readShort(), readShort());
 	}
 
+	/**
+	 * Read a low-precision Vec3 ("Lp Vec3"), used since 1.21.9 by the spawn-entity and
+	 * set-entity-velocity packets. 1 byte when zero, otherwise 6 bytes packing 3x15 bits
+	 * plus a 2-bit scale (extended by a VarInt when the continuation flag is set).
+	 *
+	 * @return the decoded vector, in blocks per tick
+	 */
+	public Vector readLpVec3() {
+		int byte1 = readUnsignedByte();
+		if (byte1 == 0)
+			return new Vector(0, 0, 0);
+		int byte2 = readUnsignedByte();
+		long bytes3To6 = readUnsignedInt();
+		long packed = (bytes3To6 << 16) | ((long) byte2 << 8) | (long) byte1;
+		long scaleFactor = byte1 & 0x03L;
+		if ((byte1 & 0x04L) != 0)
+			scaleFactor |= Integer.toUnsignedLong(readVarInt()) << 2L;
+		double scale = scaleFactor;
+		return new Vector(unpackLp(packed >> 3) * scale, unpackLp(packed >> 18) * scale, unpackLp(packed >> 33) * scale);
+	}
+
+	private static double unpackLp(long value) {
+		return Math.min((double) (value & 32767L), 32766.0D) * 2.0D / 32766.0D - 1.0D;
+	}
+
 	public long[] readLongArray() {
 		return readLongArray(Integer.MAX_VALUE);
 	}

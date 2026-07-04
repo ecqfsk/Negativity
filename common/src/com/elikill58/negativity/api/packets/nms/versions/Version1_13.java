@@ -53,6 +53,5 @@ public class Version1_13 extends NamedVersion {
 		}
 		loadPostFlattening("/versions/v1_13/");
 		
-		log();
 	}
 }

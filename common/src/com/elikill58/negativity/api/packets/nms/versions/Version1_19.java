@@ -74,6 +74,5 @@ public class Version1_19 extends NamedVersion {
 		}
 		loadPostFlattening("/versions/v1_19/");
 		
-		log();
 	}
 }

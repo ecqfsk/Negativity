@@ -4,7 +4,7 @@ import com.elikill58.negativity.universal.utils.ReflectionUtils;
 
 public enum SubPlatform {
 
-	CRAFTBUKKIT("CraftBukkit", ReflectionUtils.isClassExist("org.spigotmc.SpigotConfig")),
+	CRAFTBUKKIT("CraftBukkit", ReflectionUtils.isClassExist("org.spigotmc.SpigotConfig") && !ReflectionUtils.isClassExist("com.destroystokyo.paper.PaperVersionFetcher")),
 	SPIGOT("Spigot", false),
 	FOLIA("Folia", ReflectionUtils.isClassExist("io.papermc.paper.threadedregions.RegionizedServer")),
 	PAPER("Paper", ReflectionUtils.isClassExist("com.destroystokyo.paper.PaperVersionFetcher")),
