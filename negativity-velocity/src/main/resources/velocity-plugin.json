@@ -1,0 +1,8 @@
+{
+  "id": "negativity",
+  "name": "Negativity",
+  "version": "${version}",
+  "description": "Negativity Velocity companion (modern)",
+  "authors": ["Elikill58"],
+  "main": "com.elikill58.negativity.velocity.VelocityNegativityPlugin"
+}

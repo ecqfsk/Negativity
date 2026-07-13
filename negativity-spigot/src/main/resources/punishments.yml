@@ -1,0 +1,3 @@
+enabled: false
+default-commands:
+  - "kick %player% Negativity: %check% (VL %vl%)"

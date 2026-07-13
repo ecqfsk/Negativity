@@ -1,0 +1,304 @@
+checks:
+  speed:
+    enabled: true
+    exact_name: "Speed"
+    alert-vl: 5.0
+    setback-vl: 10.0
+    punish-vl: 25.0
+    buffer-decay: 0.6
+    buffer-max: 40.0
+    alert-cooldown-ms: 1000
+    weight: 1.0
+    setback: true
+    cancel: false
+    log-only: false
+    ground-max: 0.36
+    air-max: 0.42
+    commands: []
+
+  fly:
+    enabled: true
+    exact_name: "Fly"
+    alert-vl: 5.0
+    setback-vl: 10.0
+    punish-vl: 25.0
+    buffer-decay: 0.5
+    buffer-max: 40.0
+    alert-cooldown-ms: 1000
+    weight: 1.0
+    setback: true
+    cancel: false
+    log-only: false
+    air-ticks-threshold: 12
+    commands: []
+
+  timer:
+    enabled: true
+    exact_name: "Timer"
+    alert-vl: 6.0
+    setback-vl: 12.0
+    punish-vl: 30.0
+    buffer-decay: 0.4
+    buffer-max: 50.0
+    alert-cooldown-ms: 1500
+    weight: 1.0
+    setback: false
+    cancel: false
+    log-only: false
+    max-packets-per-second: 22
+    sample-seconds: 5
+    commands: []
+
+  nofall:
+    enabled: true
+    exact_name: "NoFall"
+    alert-vl: 4.0
+    setback-vl: 8.0
+    punish-vl: 20.0
+    buffer-decay: 0.5
+    buffer-max: 30.0
+    setback: false
+    commands: []
+
+  jesus:
+    enabled: true
+    exact_name: "Jesus"
+    alert-vl: 5.0
+    setback-vl: 10.0
+    punish-vl: 22.0
+    buffer-decay: 0.5
+    buffer-max: 30.0
+    setback: true
+    commands: []
+
+  spider:
+    enabled: true
+    exact_name: "Spider"
+    alert-vl: 5.0
+    setback-vl: 10.0
+    punish-vl: 22.0
+    buffer-decay: 0.5
+    buffer-max: 30.0
+    setback: true
+    commands: []
+
+  step:
+    enabled: true
+    exact_name: "Step"
+    alert-vl: 4.0
+    setback-vl: 9.0
+    punish-vl: 20.0
+    buffer-decay: 0.6
+    buffer-max: 25.0
+    setback: true
+    max-step: 0.6
+    commands: []
+
+  phase:
+    enabled: true
+    exact_name: "Phase"
+    alert-vl: 3.0
+    setback-vl: 6.0
+    punish-vl: 15.0
+    buffer-decay: 0.4
+    buffer-max: 20.0
+    setback: true
+    commands: []
+
+  noslow:
+    enabled: true
+    exact_name: "NoSlow"
+    alert-vl: 4.0
+    setback-vl: 9.0
+    punish-vl: 20.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    setback: false
+    commands: []
+
+  airjump:
+    enabled: true
+    exact_name: "AirJump"
+    alert-vl: 4.0
+    setback-vl: 8.0
+    punish-vl: 18.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    setback: true
+    commands: []
+
+  noweb:
+    enabled: true
+    exact_name: "NoWeb"
+    alert-vl: 4.0
+    setback-vl: 8.0
+    punish-vl: 18.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    max-horizontal: 0.09
+    setback: false
+    commands: []
+
+  fastladder:
+    enabled: true
+    exact_name: "FastLadder"
+    alert-vl: 4.0
+    setback-vl: 8.0
+    punish-vl: 18.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    max-dy: 0.15
+    setback: false
+    commands: []
+
+  elytrafly:
+    enabled: true
+    exact_name: "ElytraFly"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 25.0
+    buffer-decay: 0.4
+    buffer-max: 30.0
+    max-horizontal: 1.8
+    setback: false
+    commands: []
+
+  inventorymove:
+    enabled: true
+    exact_name: "InventoryMove"
+    alert-vl: 4.0
+    setback-vl: 10.0
+    punish-vl: 20.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    max-horizontal: 0.15
+    setback: false
+    commands: []
+
+  reach:
+    enabled: true
+    exact_name: "Reach"
+    alert-vl: 4.0
+    setback-vl: 10.0
+    punish-vl: 22.0
+    buffer-decay: 0.4
+    buffer-max: 30.0
+    max-distance: 3.15
+    setback: false
+    commands: []
+
+  killaura:
+    enabled: true
+    exact_name: "KillAura"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 25.0
+    buffer-decay: 0.45
+    buffer-max: 35.0
+    max-angle-deg: 70
+    setback: false
+    commands: []
+
+  autoclick:
+    enabled: true
+    exact_name: "AutoClick"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 28.0
+    buffer-decay: 0.7
+    buffer-max: 40.0
+    max-cps: 18
+    setback: false
+    commands: []
+
+  criticals:
+    enabled: true
+    exact_name: "Criticals"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 22.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    setback: false
+    commands: []
+
+  velocity:
+    enabled: true
+    exact_name: "Velocity"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 25.0
+    buffer-decay: 0.35
+    buffer-max: 30.0
+    setback: false
+    commands: []
+
+  scaffold:
+    enabled: true
+    exact_name: "Scaffold"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 25.0
+    buffer-decay: 0.5
+    buffer-max: 30.0
+    setback: false
+    commands: []
+
+  nuker:
+    enabled: true
+    exact_name: "Nuker"
+    alert-vl: 4.0
+    setback-vl: 10.0
+    punish-vl: 22.0
+    buffer-decay: 0.5
+    buffer-max: 30.0
+    max-bps: 12
+    setback: false
+    commands: []
+
+  fastplace:
+    enabled: true
+    exact_name: "FastPlace"
+    alert-vl: 4.0
+    setback-vl: 10.0
+    punish-vl: 22.0
+    buffer-decay: 0.5
+    buffer-max: 30.0
+    max-pps: 14
+    setback: false
+    commands: []
+
+  fastbow:
+    enabled: true
+    exact_name: "FastBow"
+    alert-vl: 4.0
+    setback-vl: 10.0
+    punish-vl: 20.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    min-interval-ms: 150
+    setback: false
+    commands: []
+
+  regen:
+    enabled: true
+    exact_name: "Regen"
+    alert-vl: 4.0
+    setback-vl: 10.0
+    punish-vl: 20.0
+    buffer-decay: 0.5
+    buffer-max: 25.0
+    min-interval-ms: 450
+    setback: false
+    commands: []
+
+  badpackets:
+    enabled: true
+    exact_name: "BadPackets"
+    alert-vl: 5.0
+    setback-vl: 12.0
+    punish-vl: 30.0
+    buffer-decay: 0.6
+    buffer-max: 40.0
+    setback: false
+    commands: []

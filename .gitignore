@@ -1,22 +1,40 @@
-# Eclipse IDE
+﻿# IDE
 .classpath
 .project
-.settings
-/bin
-
-# IntelliJ IDEA
+.settings/
 *.iml
 *.ipr
 *.iws
 .idea/
+.vscode/
+*.swp
+*~
 
-# Maven
-/target
+# Build / Gradle
+.gradle/
+build/
+**/build/
+/bin/
+/out/
+/target/
+/dist/
+*.class
 
-# Mac filesystem
+# OS
 .DS_Store
+Thumbs.db
+desktop.ini
 
-# Other
-/dist
-/build
-/pasltime.jardesc
+# Runtime / local
+*.log
+logs/
+run/
+server/
+paper/
+*.db
+*.db-journal
+.env
+*.local
+
+# Keep wrapper jar
+!gradle/wrapper/gradle-wrapper.jar

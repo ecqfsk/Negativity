@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [master, main, v2]
+  pull_request:
+    branches: [master, main, v2]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew || true
+
+      - name: Build
+        run: |
+          if [ -f ./gradlew ]; then
+            ./gradlew build --stacktrace
+          else
+            gradle build --stacktrace
+          fi
+
+      - name: Upload Spigot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Negativity-Spigot
+          path: negativity-spigot/build/libs/Negativity-*.jar
+          if-no-files-found: warn

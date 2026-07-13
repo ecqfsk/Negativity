@@ -1,0 +1,48 @@
+name: Negativity
+main: com.elikill58.negativity.spigot.NegativityPlugin
+version: ${version}
+api-version: '1.21'
+author: [Elikill58, Negativity-Modern]
+description: Modernized Minecraft anticheat for Paper and forks.
+website: https://github.com/Elikill58/Negativity
+softdepend: [ProtocolLib, ViaVersion, floodgate, WorldGuard, Essentials, LiteBans, AdvancedBan]
+folia-supported: false
+
+commands:
+  negativity:
+    description: Negativity main command
+    permission: negativity.negativity
+    aliases: [n, neg, nnegativity]
+
+permissions:
+  negativity.*:
+    description: Full Negativity access
+    children:
+      negativity.negativity: true
+      negativity.alert: true
+      negativity.alerts: true
+      negativity.admin: true
+      negativity.reload: true
+      negativity.exempt: true
+      negativity.check: true
+  negativity.negativity:
+    description: Use /negativity
+    default: op
+  negativity.alert:
+    description: Receive cheat alerts
+    default: op
+  negativity.alerts:
+    description: Toggle personal alerts
+    default: op
+  negativity.admin:
+    description: Admin operations
+    default: op
+  negativity.reload:
+    description: Reload safe configuration
+    default: op
+  negativity.exempt:
+    description: Manually exempt players
+    default: op
+  negativity.check:
+    description: Inspect player checks
+    default: op

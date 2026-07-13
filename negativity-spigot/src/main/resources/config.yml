@@ -1,0 +1,40 @@
+# Negativity modernized configuration
+debug: false
+language: pt_BR
+server-name: "server"
+
+performance:
+  tick-interval: 20
+
+latency:
+  soft-ping-ms: 200
+  unstable-ping-ms: 400
+  history-size: 20
+
+tps:
+  soft-threshold: 19.0
+  hard-threshold: 15.0
+
+exemptions:
+  join-ms: 8000
+  teleport-ms: 2000
+  respawn-ms: 2000
+  world-change-ms: 3000
+  knockback-ms: 750
+
+alerts:
+  enabled: true
+  cooldown-ms: 1000
+  clickable: true
+  permission: "negativity.alert"
+  format: "&c[Negativity] &e%player% &7falhou &c%check% %subcheck% &7| VL: &f%vl% &7| Buffer: &f%buffer% &7| Ping: &f%ping%ms &7| TPS: &f%tps%"
+
+storage:
+  type: sqlite
+  async: true
+  sqlite-file: "violations.db"
+
+proxy:
+  enabled: true
+  channel: "negativity:msg"
+  require-server-sender: true
